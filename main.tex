@@ -29,32 +29,50 @@
 % Enable line numbering
 \linenumbers
 
+\newcommand\blfootnote[1]{
+    \begingroup
+    \renewcommand\thefootnote{}\footnote{#1}
+    \addtocounter{footnote}{-1}
+    \endgroup
+}
+
 \begin{document}
 
 % Title
-\title{An Unofficial Latext template}
+\title{GrapeCPNet: A deep learning integration for grape completion and phenotyping in 3D}
 \author{
-    Abc\textsuperscript{a,*},
-    Waa \textsuperscript{a},
-    xxa \textsuperscript{a}
+    Wenli Zhang \textsuperscript{a,*},
+    Chao Zheng \textsuperscript{a},
+    Chenhuizi Wang \textsuperscript{a},
+    Pieter M. Blok \textsuperscript{b}, \\
+    Haozhou Wang \textsuperscript{b},
+    Wei Guo \textsuperscript{b}
+    \blfootnote{Corresponding author: zhangwenli@bjut.edu.cn}
+    \blfootnote{Email addresses: zhengchao97201@163.com (Chao Zheng), Wangchenhuizi@emails.bjut.edu.cn (Chenhuizi Wang), pieter.blok@fieldphenomics.com (Pieter M. Blok), haozhou-wang@g.ecc.u-tokyo.ac.jp (Haozhou Wang), guowei@g.ecc.u-tokyo.ac.jp (Wei Guo)}
 }
 \date{}
 
 \maketitle
 
 % Footnotes for authors
-\noindent\textsuperscript{a} Centre for Machine Vision, , United Kingdom \\
-Email: \{abc, yxz,, aaa\}@yahoo.ac.uk \\
-%\textsuperscript{b}Affiliation 2, Full address, Country, email2@example.com\\
-%\textsuperscript{c}Affiliation 3, Full address, Country, email3@example.com\\
-\textsuperscript{*}Corresponding author: abc@ yahoo.ac.uk
+\noindent\textsuperscript{a} Information Department, Beijing University of Technology, Beijing, China \\
+% Email: zhangwenli@bjut.edu.cn \\
+\textsuperscript{b} Graduate School of Agricultural and Life Sciences, The University of Tokyo, Tokyo, Japan\\
+% \textsuperscript{*} \\
 
 \begin{abstract}
-
-
+The measurement of phenotypic parameters of fresh grapes, especially at the individual berry level, is critical for yield estimation and quality control. 
+Currently, these measurements are done by humans, making it costly, labor-intensive, and often inaccurate. 
+Advances in 3D reconstruction and point cloud analysis allow extraction of detailed for grapes, yet current methods struggle with instance segmentation on incomplete point clouds due to occlusion. 
+This study presents a novel deep-learning-based phenotyping pipeline designed specifically for 3D grape point cloud data.                                                         
+First, individual berries are segmented from the grape bunch using the SoftGroup deep learning network. 
+Next, a self-supervised point cloud completion network, termed GrapeCPNet, addresses occlusions by completing missing areas.  
+Finally, morphological analyses are applied to extract berry radius and volumes. 
+Validation on a dataset of four fresh grape varieties yielded  $R^2$ values of 85.53\% for berry radius and 96.89\% for berry volume, respectively. 
+These results demonstrate the potential of the proposed method for rapid, practical acquisition of grape 3D phenotypic information in grape cultivation.
 \end{abstract}
 
-\textbf{Keywords:} Computer vision
+\textbf{Keywords:} 3D point cloud analysis, instance segmentation, shape completion
 
 \doublespacing
 
