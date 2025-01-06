@@ -129,9 +129,9 @@ And at the end, the pipeline has been tested on four different fresh grape speci
 \section{Materials and Methods}
 
 In this section, we first introduce the four experimental grape materials and the 3D reconstruction methods for obtaining 3D point cloud data. 
-We then provide a brief overview of the SoftGroup [32] deep learning network, which was trained on our previous point cloud dataset for instance segmentation of individual berries (Fig. 1a). 
-Next, we detail the proposed self-supervised completion deep learning module, GrapeCPNet, which predicts the complete berry point cloud from segmented partial berries (Fig. 1b). 
-Subsequently, we describe the module and method for calculating phenotypic traits (Fig. 1c). 
+We then provide a brief overview of the SoftGroup [32] deep learning network, which was trained on our previous point cloud dataset for instance segmentation of individual berries (Fig.~\ref{fig:raw1}a). 
+Next, we detail the proposed self-supervised completion deep learning module, GrapeCPNet, which predicts the complete berry point cloud from segmented partial berries (Fig.~\ref{fig:raw1}b). 
+Subsequently, we describe the module and method for calculating phenotypic traits (Fig.~\ref{fig:raw1}c). 
 Finally, we introduced the evaluation method for model training and results validation.
 
 % fig.1
@@ -147,7 +147,7 @@ Finally, we introduced the evaluation method for model training and results vali
 \subsubsection{Grape species selection}
 
 To ensure the generality and applicability of the study, this paper considers the sparsity, shape, and color of the bunch, and chooses four common fresh grapes as the experimental materials, which are Red Grape, Green Grape, Kyoho Grape, and Shine-Muscat Grape. 
-The characteristics of them are shown in Table 1 and the examples are shown in Figure 8.
+The characteristics of them are shown in Table~\ref{tlb:1} and the examples are shown in Figure~\ref{fig:raw86}.
 
 % table 1
 \begin{table}[h]
@@ -176,8 +176,8 @@ The characteristics of them are shown in Table 1 and the examples are shown in F
 
 \subsubsection{3D reconstruction of grape}
 
-In this paper, the multi-view images acquisition and 3D reconstruction by Agisoft Metashape (Agisoft LLC, St. Petersburg, Russia) was used to obtain the 3D point cloud of bunch (Fig. 9a) and single complete berry (Fig. 9b). 
-Their correspondence of the same berry was also labelled as shown in Figure 9c
+In this paper, the multi-view images acquisition and 3D reconstruction by Agisoft Metashape (Agisoft LLC, St. Petersburg, Russia) was used to obtain the 3D point cloud of bunch (Fig.~\ref{fig:raw9}a) and single complete berry (Fig.~\ref{fig:raw9}b). 
+Their correspondence of the same berry was also labelled as shown in Figure~\ref{fig:raw9}c
 
 % fig.9
 \begin{figure}[hbt!]
@@ -187,15 +187,15 @@ Their correspondence of the same berry was also labelled as shown in Figure 9c
     \label{fig:raw9}
 \end{figure}
 
-For whole bunch multi-view images acquisition, the device was built as shown in Figure 9a. 
-One grape bunch was hung on the hook which was attached to propellers driven by stepping motors (Fig. 9a1) that can achieve rotation at a certain speed. 
-The entire device was placed in front of a solid-colored backdrop (Fig. 9a2 ), and multiple cameras were set up to photograph the bunch from different height angles. 
+For whole bunch multi-view images acquisition, the device was built as shown in Figure~\ref{fig:raw9}a. 
+One grape bunch was hung on the hook which was attached to propellers driven by stepping motors (Fig.~\ref{fig:raw9}a1) that can achieve rotation at a certain speed. 
+The entire device was placed in front of a solid-colored backdrop (Fig.~\ref{fig:raw9}a2), and multiple cameras were set up to photograph the bunch from different height angles. 
 In addition, a ruler with markers were used for scale correction. 
-For single complete berry multi-view images acquisition in batch (Fig. 9b). 
-Nine berries were fixed floating by needle disk (Fig. 9b1) on a turntable device (Fig. 9b2). 
+For single complete berry multi-view images acquisition in batch (Fig.~\ref{fig:raw9}b). 
+Nine berries were fixed floating by needle disk (Fig.~\ref{fig:raw9}b1) on a turntable device (Fig.~\ref{fig:raw9}b2). 
 The background, cameras, and marker settings are similar to the previous bunch reconstruction. 
-The number of reconstructed images and the shooting parameters are selected, as shown in Table 2. 
-Examples of the point cloud of bunch, multiple berries, and single complete berries from multiple berries are shown in Figure 10.
+The number of reconstructed images and the shooting parameters are selected, as shown in Table~\ref{tlb:2}. 
+Examples of the point cloud of bunch, multiple berries, and single complete berries from multiple berries are shown in Figure~\ref{fig:raw10}.
 
 % table 2
 \begin{table}[h]
@@ -222,7 +222,7 @@ Examples of the point cloud of bunch, multiple berries, and single complete berr
 
 \subsection{Berry Instance Segmentation}
 
-As Figure 1a, the single-bunch shell point cloud was represented as $P_{bunch}=\{p_i \mid i=1, \cdots, m\}$, where $p_i=(x_i,y_i,z_i)$ denotes a point in 3D space and $m$ denotes the total number of points in the point cloud of the bunch. The bunch point cloud segmentation task expects to segment $P_{bunch}$ into a combination of several individual subsets of the berries point cloud and a subset of the stem point cloud, as shown in Equation~(\ref{eq:1}).
+As Figure~\ref{fig:raw1}a, the single-bunch shell point cloud was represented as $P_{bunch}=\{p_i \mid i=1, \cdots, m\}$, where $p_i=(x_i,y_i,z_i)$ denotes a point in 3D space and $m$ denotes the total number of points in the point cloud of the bunch. The bunch point cloud segmentation task expects to segment $P_{bunch}$ into a combination of several individual subsets of the berries point cloud and a subset of the stem point cloud, as shown in Equation~(\ref{eq:1}).
 
 \begin{equation}
 P_{bunch} = \sum_{i=1}^{n} P_{berry_{i}} + P_{stem}
@@ -233,7 +233,7 @@ P_{bunch} = \sum_{i=1}^{n} P_{berry_{i}} + P_{stem}
 Meanwhile, each subset $P_{berry_{i}}=\{p_j \mid j=1, \cdots, k\}$ consists of multiple points in 3D space, which can represent the location and morphology of the visible part of the berry within the bunch.}
 
 The task of instance berry segmentation from a bunch is complex. 
-As shown in Figure 2, it involves distinct localization features and complex boundary morphology. 
+As shown in Figure~\ref{fig:raw2}, it involves distinct localization features and complex boundary morphology. 
 The distinct localization feature implies that individual berry has more geometrical and morphological details compared to the overall shape of the grape bunch, particularly when the object is a small-sized point cloud [31]. 
 The complex boundary morphology arises from berries pressing against each other, resulting in multiple curves with varying connecting depths. 
 Therefore, accurate berry instance segmentation requires a model that can both capture detailed geometric features and identify instances at boundary point. 
@@ -254,7 +254,7 @@ Therefore, it is suitable for use in a bunch where there is a tight connection b
 
 In order to train and validate SoftGroup, each berry and stem in the bunch point cloud obtained in
 % todo
-Section 2.1.2 was labeled at the instance-level (Fig. 11). 
+Section 2.1.2 was labeled at the instance-level (Fig.~\ref{fig:raw11}). 
 This paper collected and labeled 8 bunches for each of the four species (total 32 bunches). 
 In the sample division, 5 grape bunches of each species (total 20) are randomly selected and used as training samples, the remaining 12 bunches are used for validation.
 
@@ -271,7 +271,7 @@ In the sample division, 5 grape bunches of each species (total 20) are randomly 
 The self-supervised training-based berry point cloud completion was used to predict their complete 3D model. 
 Self-supervised learning is a way of training a model without artificial annotations by using the data itself as truth value to supervise [33]. 
 This subsection introduced the self-supervised strategy to generating paired training data without manual annotation and the structure of grape completion network, GrapeCPNet. 
-The whole workflow of proposed GrapeCPNet is shown in Figure 3.
+The whole workflow of proposed GrapeCPNet is shown in Figure~\ref{fig:raw3}.
 
 % figure 3
 \begin{figure}[hbt!]
@@ -287,7 +287,7 @@ The point cloud completion network often requires the incomplete-complete data p
 In this paper, the complete grapes were obtained by single berry reconstruction 
 %todo
 (Section 2.1.2) and were used as ground truth, while the incomplete grapes were cut from the complete grapes following characteristic of occlusion and were used as training inputs. 
-This data pair generation strategy saved huge amounts of data annotation. The common incomplete characteristics of the berry are shown in Figure 4.
+This data pair generation strategy saved huge amounts of data annotation. The common incomplete characteristics of the berry are shown in Figure~\ref{fig:raw4}.
 Based on the incomplete characteristics, we developed a cutting method for the complete berry point cloud to generate the incomplete berry point cloud.
 
 % figure 4
@@ -298,21 +298,21 @@ Based on the incomplete characteristics, we developed a cutting method for the c
     \label{fig:raw4}
 \end{figure}
 
-This proposed algorithm is shown in Algorithm 1. 
+This proposed algorithm is shown in Algorithm \ref{alg:1}. 
 The inputs include a single complete berry point cloud and the maximum number of cutting area (5 in this paper). 
-The output is the cut incomplete berry point clouds. First, the single complete berry point cloud was normalized and centralized (Fig. 12a). 
+The output is the cut incomplete berry point clouds. First, the single complete berry point cloud was normalized and centralized (Fig.~\ref{fig:raw12}a). 
 Second, randomly pick the integer number of cuts lower than maximum number, in this paper ranging from 1 to 5. 
 Then, for each loop of cutting, a 3D sphere model was generated in the space to collide with the berry point cloud, and the collision portion was removed to complete the cutting operation. 
 The maximum of center and radius parameters of 3D sphere model were manually set according to berry size. 
 In this paper we set maximum 0.75 for center offsets and maximum 0.25 for radius. 
-Continue the previous cut looping until meet the cut limits. The cut incomplete berry of each loop was all saved as training data (Fig. 12b). 
+Continue the previous cut looping until meet the cut limits. The cut incomplete berry of each loop was all saved as training data (Fig.~\ref{fig:raw12}b). 
 
 % algorithm 1
 \begin{algorithm}
-    \caption{The cutting method for generating incomplete training data}
+    \caption{The cutting method for generating training data of incomplete berries}
     \label{alg:1}
-    \KwData{$P_C = \{p_i \mid i = 1, \cdots, t\}$ \tcp{One complete berry pointcloud}}
-    \KwData{$n$ \tcp{Number of incomplete berries to be generated}}
+    \KwData{$P_C$ \tcp{one complete berry point cloud}}
+    \KwData{$n$ \tcp{generate incomplete berries number}}
     \KwResult{$P_{\text{output}} = \{P_{o_i} \mid i = 1, \cdots, n\}$ \tcp{incomplete berry point cloud sets} }
     
     $\hat{P_C} \gets Normalize(Translate(P_C))$ \tcp{center to $(0,0,0)$, range to $[-0.5, 0.5]$}
@@ -338,7 +338,7 @@ Continue the previous cut looping until meet the cut limits. The cut incomplete 
 \end{figure}
 
 For model training, 36 complete berry are collected for each of the four species of grape (in total 144). 
-To further expand the data quantity, based on the single complete berry point cloud obtained by reconstruction, this paper uses the PointFlow [40], a point cloud generation model to generate the simulated samples (Fig. 12c). 
+To further expand the data quantity, based on the single complete berry point cloud obtained by reconstruction, this paper uses the PointFlow [40], a point cloud generation model to generate the simulated samples (Fig.~\ref{fig:raw12}c). 
 Then, 500 complete berry point clouds are generated from PointFlow method. 
 Thus, a total of 644 complete samples are obtained. 
 Each complete berry point cloud has 5 incomplete berry point clouds corresponding to it, and a total of 3220 training data pairs are obtained. 
@@ -349,13 +349,13 @@ For the model inference validation, among 12 testing grape bunches of the berry 
 (Section 2.2), each grape species was randomly selected one bunch (total 4 bunches). 
 For each bunch, 27 berries are randomly selected, and finally obtain a total of 108 incomplete berries as the input data for completion network inference validation. 
 By checking the labels of these berries, the corresponding single complete berry reconstruction results %todo
-(Section 2.1.2 \& Fig. 9c) were used as ground truth.
+(Section 2.1.2 \& Fig.~\ref{fig:raw9}c) were used as ground truth.
 
 \subsubsection{GrapeCPNet structure}
 
 Since the entire contour of the incomplete berry is missing, the model is required to have the ability to predict the incomplete part based on the visible part and make the prediction part fit the real berry surface and avoid detail distortion. 
 This paper combines the centroid-based sparse completion structure of PoinTr [35] with the diffusion-based dense completion structure of SnowFlakeNet [36]. 
-Based on the characteristics of the berry, it has two parts: contour completion and surface completion. The network structure is shown in Figure 5.
+Based on the characteristics of the berry, it has two parts: contour completion and surface completion. The network structure is shown in Figure~\ref{fig:raw5}.
 
 % figure 5
 \begin{figure}[hbt!]
@@ -378,7 +378,7 @@ The berry point cloud completion task aims to output the complete berry point se
 After the incomplete berry point cloud set $P_{partial}=\{p_i \mid i=1,\cdots,m\}$ was fed into the network, it was firstly down-sampled to a fixed number of points $M$ ($M$ is often less than $m$, in this paper, $M$ is set to 2048) through the farthest point sampling (FPS) to obtain the center point set $P_{partial-center}=\{p_i \mid i=1, \cdots, M\}$ of the visible part of the berry. 
 This set was used as a ``representative'' to avoid huge computational effort while characterizing the complete morphology of the visible part.
 
-Then, the 3D convolutional neural networks DGCNN [37] and MLP [38] are used to obtain the local structural features of each point $p_i$ in the center point set, as shown in Equation (\ref{eq:2}).
+Then, the 3D convolutional neural networks DGCNN [37] and MLP [38] are used to obtain the local structural features of each point $p_i$ in the center point set, as shown in Equation~(\ref{eq:2}).
 
 \begin{equation}
     F_i = F_{i}^{'} + \varphi(p_i)
@@ -388,7 +388,7 @@ Then, the 3D convolutional neural networks DGCNN [37] and MLP [38] are used to o
 {\raggedright where, $F_{i}^{'}$ denotes the feature around $p_i$ obtained by DGCNN, which is the local feature of the point in the point cloud; and $\varphi(p_i)$ denotes the position information of $p_i$ obtained by MLP, which is the global feature of the point.}
 
 Finally, since the $\varphi = \{ \varphi(p_i) \mid i=1, \cdots, M \}$ contains the relative position information of each point, it can be used as the position embedding and the serialized feature $F = \{F_i \mid i=1, \cdots, M \}$ was fed into the geometrically-aware Transformer [39] based encoder. 
-The process is Equation (\ref{eq:3}).
+The process is Equation~(\ref{eq:3}).
 
 \begin{equation}
     V = T_e(F)
@@ -396,7 +396,7 @@ The process is Equation (\ref{eq:3}).
 \end{equation}
 
 {\raggedright where, $T_e$ denotes the encoder of the Transformer and $V=\{V_i |i=1, \cdots, M\}$ denotes the encoded feature. 
-Next, the predicted centroid point set of the missing part was output by the decoder, and the process as Equation (\ref{eq:4}).}
+Next, the predicted centroid point set of the missing part was output by the decoder, and the process as Equation~(\ref{eq:4}).}
 
 \begin{equation}
     P_{pred-center} = T_d(V)
@@ -418,7 +418,7 @@ Then, $P_{pred-center}$ was fed into multiple SPD [36] connected serially of Sno
 On the one hand, the SPD diffuses from the center point in a tree structure around, revealing the detailed geometric structure of the local region. 
 This method effectively represents the surface geometric features composed between the points in the localized region of the berry. 
 On the other hand, the iteration of multiple point splitting steps delivers information from each one to the next one. 
-This approach effectively characterizes the curvature changes on the surface of the berry. The process is Equation (\ref{eq:5}).
+This approach effectively characterizes the curvature changes on the surface of the berry. The process is Equation~(\ref{eq:5}).
 
 \begin{equation}
     P_{i+1} = SPD(P_i)
@@ -432,12 +432,12 @@ Through the above two steps, the complete 3D point cloud model of the berry can 
 
 \subsection{Phenotypic Traits Calculation and Validation}
 
-To describe the 3D morphology of berries, this paper used ellipsoidal surface fitting with three axes, for the completed berry point cloud (Fig. 7).
+To describe the 3D morphology of berries, this paper used ellipsoidal surface fitting with three axes, for the completed berry point cloud (Fig.~\ref{fig:raw7}).
 
 % figure 7 -> removed
 
 Suppose the point cloud of the complete berry is denoted as $P_{complete}=\{P_i \mid i=1, \cdots,n\}$, where $p_i=(x_i,y_i,z_i)$ denotes a point in the 3D space, and $n$ denotes the number of points. 
-In this paper, it is fitted to an ellipsoid surface with three unequal long axes by the least squares method, and the function is shown in Equation (\ref{eq:6}).
+In this paper, it is fitted to an ellipsoid surface with three unequal long axes by the least squares method, and the function is shown in Equation~(\ref{eq:6}).
 
 \begin{equation}
     \frac{(x-x_0)^2}{a^2} + \frac{(y-y_0)^2}{b^2} + \frac{(z-z_0)^2}{c^2} = 1
@@ -447,7 +447,7 @@ In this paper, it is fitted to an ellipsoid surface with three unequal long axes
 {\raggedright where, $(x,y,z)$ denotes a point on the ellipsoid surface, $(x_0,y_0,z_0)$ denotes the coordinates of the ellipsoid center point, and $a$, $b$, $c$ are the half-long, half-middle, and half-short axes, respectively (assuming that $a>b>c>0$). }
 
 Thus, the values of $a$, $b$, $c$ can represent the berry radius parameters. 
-At the same time, the volume of the berry can be calculated as shown in Equation (\ref{eq:7}).
+At the same time, the volume of the berry can be calculated as shown in Equation~(\ref{eq:7}).
 
 \begin{equation}
     V=\frac{4}{3} \pi a b c
@@ -471,7 +471,7 @@ In this paper, we use the format of SoftGroup [32] that is consistent with the S
 \subsubsection{Berry self-supervised completion}
 
 In this paper, we use the format of PoinTr [35] that is consistent with the PCN dataset [42] and use the chamfer distance (CD-distance) and F-Score to measure the effect of berry completion. 
-For each sample, the chamfer distance $d_CD$ between the predicted point set $P$ and the true point set $G$ is calculated as shown in Equation (\ref{eq:8})
+For each sample, the chamfer distance $d_CD$ between the predicted point set $P$ and the true point set $G$ is calculated as shown in Equation~(\ref{eq:8})
 
 \begin{equation}
     d_{CD}(P, G) = \frac{1}{|P|} \sum_{p \in P} \min_{g \in G} \|p - g\|_2^2 + \frac{1}{|G|} \sum_{g \in G} \min_{p \in P} \|g - p\|_2^2
@@ -518,7 +518,7 @@ In order to validate the efficiency of the method proposed in this paper, the ex
 Bunch point cloud segmentation is mainly realized based on SoftGroup, a point cloud segmentation network. 
 This paper calculates the segmentation results for the berry instances and stem instances using the dataset introduced in 
 %todo
-Section 2.2 and the evaluation metrics in Section 2.5.1, as shown in Table 3.
+Section 2.2 and the evaluation metrics in Section 2.5.1, as shown in Table~\ref{tlb:3}.
 
 % table 3
 \begin{table}[h]
@@ -535,7 +535,7 @@ Section 2.2 and the evaluation metrics in Section 2.5.1, as shown in Table 3.
     \end{tabular}
 \end{table}
 
-As can be seen from Table 3, the AP value of the point cloud instance segmentation for the berry category is over 99\%, which shows a high accuracy of the berry segmentation from the bunch. The visualization results of four fresh grapes for bunch point cloud segmentation using SoftGroup are shown in Figure 13.
+As can be seen from Table~\ref{tlb:3}, the AP value of the point cloud instance segmentation for the berry category is over 99\%, which shows a high accuracy of the berry segmentation from the bunch. The visualization results of four fresh grapes for bunch point cloud segmentation using SoftGroup are shown in Figure~\ref{fig:raw13}.
 
 % figure 13
 \begin{figure}[hbt!]
@@ -557,9 +557,9 @@ Therefore, in order to verify the efficiency of berry point cloud completion in 
 
 
 Meanwhile, since the point cloud obtained after berry picking is used as the ground truth, the point cloud alignment is performed to calculate evaluation metrics of the predicted complete berry point cloud with the ground truth.
-The experimental results of comparing to other point cloud completion algorithms are shown in Table 4. 
+The experimental results of comparing to other point cloud completion algorithms are shown in Table~\ref{tlb:4}. 
 GrapeCPNet achieves the best results under the self-supervised training method in both the training phase and the application phase, better than the other comparative algorithms. 
-The visualization of using GrapeCPNet to complement the incomplete berry segmented from the bunch in the application phase is shown in Figure 14.
+The visualization of using GrapeCPNet to complement the incomplete berry segmented from the bunch in the application phase is shown in Figure~\ref{fig:raw14}.
 
 % table 4
 \begin{table}[h]
@@ -611,7 +611,7 @@ Based on the method in this paper, the bunch point cloud is used as input, and t
 In this paper, experiments are conducted to calculate berry radius and volume with the dataset in the evaluation metrics in 
 %todo
 Section 2.5.3.
-The radius parameters are calculated by fitting the berry to the surface of an ellipsoid, as shown in Figure 16.
+The radius parameters are calculated by fitting the berry to the surface of an ellipsoid, as shown in Figure~\ref{fig:raw16}.
 
 % figure 16
 \begin{figure}[hbt!]
@@ -625,7 +625,7 @@ Three lengths of the radius of the berry can be obtained by fitting the predicte
 Meanwhile, the point cloud data acquisition method in 
 %todo
 Section 2.1.2 can translate the scale of the point cloud space to the real world, so as to get the real radius length of the berry.
-Because of the large difference between the ratio of the long and short axis of different species, this paper conducted experiments on the calculation of the axis length of four species respectively, as shown in Figure 17.
+Because of the large difference between the ratio of the long and short axis of different species, this paper conducted experiments on the calculation of the axis length of four species respectively, as shown in Figure~\ref{fig:raw17}.
 
 % figure 17
 \begin{figure}[hbt!]
@@ -635,7 +635,7 @@ Because of the large difference between the ratio of the long and short axis of 
     \label{fig:raw16}
 \end{figure}
 
-As shown in Figure 17, each point on the subplot block represents a berry sample, the horizontal coordinate indicates the true value of the axis length, the vertical coordinate indicates the prediction value, and the $R^2$ and MAE are displayed in the figure at the same time. 
+As shown in Figure~\ref{fig:raw17}, each point on the subplot block represents a berry sample, the horizontal coordinate indicates the true value of the axis length, the vertical coordinate indicates the prediction value, and the $R^2$ and MAE are displayed in the figure at the same time. 
 From the results, it can be seen that the proposed method achieves an average $R^2$ of 0.86 for the three axis lengths of the four species of grape. 
 The analysis based on different perspectives is as follows.
 
@@ -649,7 +649,7 @@ It can be seen that the prediction accuracy of the long axis is significantly hi
 This is due to the fact that in berry completion and fitting, the long axis is the easiest to determine, with less fitting error compared to the other two axes.
 
 The experimental results show that the proposed method has achieved high accuracy in the calculation of the radius of different grape species. 
-In addition, based on the radius prediction results, the volume of all 108 berry samples is calculated in this paper, and the experimental results are shown in Figure 18.
+In addition, based on the radius prediction results, the volume of all 108 berry samples is calculated in this paper, and the experimental results are shown in Figure~\ref{fig:raw18}.
 
 % figure 18
 \begin{figure}[hbt!]
