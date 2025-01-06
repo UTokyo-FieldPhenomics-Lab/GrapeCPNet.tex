@@ -281,7 +281,7 @@ The whole workflow of proposed GrapeCPNet is shown in Figure~\ref{fig:raw3}.
 \begin{figure}[hbt!]
     \centering
     \includegraphics[width=1\textwidth]{figures/Figure7.pdf}
-    \caption{Flowchart of the self-supervised berry point cloud completion, including model training and model inferencing (application) phases. In the training phase, the paired incomplete training data was generated from the complete single berry point cloud, then train GrapeCPNet self-supervisely without manual annotation. In the application phase, the incomplete berry point cloud is input into the trained model to obtain a complete prediction berry.}
+    \caption{Flowchart of the self-supervised berry point cloud completion, including model training and model inferencing (application) phases. In the training phase, the paired incomplete training data was generated from the complete single berry point cloud, then train GrapeCPNet using self-supervised methods without manual annotation. In the application phase, the incomplete berry point cloud is input into the trained model to obtain a complete prediction berry.}
     \label{fig:raw3}
 \end{figure}
 
@@ -431,7 +431,7 @@ Through the above two steps, the complete 3D point cloud model of the berry can 
 
 \subsection{Phenotypic Traits Calculation and Validation}
 
-To describe the 3D morphology of berries, this paper used ellipsoidal surface fitting with three axes, for the completed berry point cloud (Fig.~\ref{fig:raw7}).
+To describe the 3D morphology of berries, this paper used ellipsoidal surface fitting with three axes, for the completed berry point cloud.
 
 % figure 7 -> removed
 
@@ -626,7 +626,7 @@ Because of the large difference between the ratio of the long and short axis of 
     \centering
     \includegraphics[width=1\textwidth]{figures/Figure14.pdf}
     \caption{Experimental results of axis length calculation for four species of fresh grape. From (a)-(d): Red Grape, Green Grape, Kyoho Grape, and Shine-Muscat Grape, and from (1)-(3): the calculation of the long, middle, and short axis, respectively.}
-    \label{fig:raw16}
+    \label{fig:raw17}
 \end{figure}
 
 As shown in Figure~\ref{fig:raw17}, each point on the subplot block represents a berry sample, the horizontal coordinate indicates the true value of the axis length, the vertical coordinate indicates the prediction value, and the $R^2$ and MAE are displayed in the figure at the same time. 
@@ -676,7 +676,7 @@ Further, it can understand the phenotypic change law of crops under a natural gr
 
 
 \section*{CRediT authorship contribution statement}
-\textbf{Wenli Zhang}: conceptualisation, methodology, supervision, funding acquisition, project administration, writing - review; \textbf{Chao Zheng}: methodology, software, data curation, writing - original draft \& editing; \textbf{Chenhuizi Wang}: data curation, software; \textbf{Pieter M. Blok}: methodology, supervision, writing - review \& editing; \textbf{Haozhou Wang}: methodology, writing - review \& editing; \textbf{Wei Guo}: conceptualisation, methodology, funding acquisition, supervision, writing - review \& editing.
+\textbf{Wenli Zhang}: conceptualization, methodology, supervision, funding acquisition, project administration, writing - review; \textbf{Chao Zheng}: methodology, software, data curation, writing - original draft \& editing; \textbf{Chenhuizi Wang}: data curation, software; \textbf{Pieter M. Blok}: methodology, supervision, writing - review \& editing; \textbf{Haozhou Wang}: methodology, writing - review \& editing; \textbf{Wei Guo}: conceptualization, methodology, funding acquisition, supervision, writing - review \& editing.
 
 \section*{Declaration of generative AI and AI-assisted technologies in the writing process.}
 During the preparation of this work the author(s) used ChatGPT in order to check grammar, spelling, and improve fluency. After using this tool/service, the author(s) reviewed and edited the content as needed and take(s) full responsibility for the content of the published article.
