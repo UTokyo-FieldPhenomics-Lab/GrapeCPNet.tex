@@ -108,23 +108,25 @@ Unlike previous studies focused on canopy level or individual plant level analys
 The aggregated cluster growth \citep{du_instance_2023} causes the berries to squeezed against each other, leading to interior occlusion and resulting in an incomplete point cloud of berry surfaces. 
 Therefore, point cloud instance segmentation can only capture partial information rather than that of whole berries.
 
-To address the partial point cloud problem, some researchers applied deep learning-based point cloud completion \citep{wang_unsupervised_2021}. 
+To address the issue of partial point clouds, point cloud shape completion is one of the most commonly employed solutions.
+\citet{ge_symmetrybased_2020} assume that strawberries are symmetrical, suggesting that their shape can be completed by mirroring the existing shape, provided an appropriate symmetrical plane can be identified.
+\citet{marangoz_fruit_2022} proposed an super-ellipsoids matching approach to map fruits on plants and estimate their shape.
+However, these methods are limited to specific fruit characteristics and require manual design of algorithms tailored to the features of the fruit, lacking the potential for generalized application.
+some researchers applied deep learning-based point cloud completion \citep{wang_unsupervised_2021}. 
 Point cloud completion is the task of generating a complete 3D shape given partial point cloud input \citep{tesema_point_2024}. 
 Utilizing deep learning methods, researchers have designed point cloud completion networks. 
 \citet{park_deepsdf_2019} introduced DeepSDF to achieve the completion of object point cloud models. It uses a learned continuous signed distance function to represent a class of shapes in latent space and is tolerant to noisy 3D input data. 
 \citet{magistri_contrastive_2022} utilized a latent space of potential fruit appearances and propose an encoder-decoder network that converted a single RGB-D frame to a 3D shape of a complete fruit. 
 This network was extended and upgraded by \citet{blok_highthroughput_2025} for high-throughput 3D shape completion of potato tubers on a commercial harvester.
 \citet{tang_lakenet_2022} proposed a point cloud completion network Lake-net for furniture model point cloud datasets. 
-For grape berry application, the completion network is expected to infer a complete point cloud model based on a single partial berry point cloud after bunch segmentation. 
-However, existing models are mainly designed for feature extraction of objects consisting of simple geometric forms such as surfaces with fixed curvature, and absolute planes \citep{fei_comprehensive_2022}. 
-The shape of the berry can roughly approach the deformation of a sphere or ellipsoid depending on the species, and its surface consists of multiple spherical surfaces of varying curvature, with a rich characterization of details. 
-This leads to difficulties in the direct application of existing networks. 
-Therefore, there is an urgent demand to construct a network that can complete the detailed surface of an incomplete berry point cloud.
+For grape berry application, the shape of the berry can roughly approach the deformation of a sphere or ellipsoid depending on the species, and its surface consists of multiple spherical surfaces of varying curvature, with a rich characterization of details. 
+The existing datasets from other fruits cannot be applied directly, and manually creating paired training datasets is time-consuming and labor-intensive \citep{blok_highthroughput_2025}.
+Therefore, there is a demand to develop a network and pipeline, capable of completing the detailed surface of an incomplete berry point cloud while requiring less labor-intensive training data preparation.
 
 In this study, we proposed a berry-level 3D grape phenotyping pipeline that will overcome the occlusion issue. 
 The proposed pipeline includes: 
 (1) individual berry segmentation module that segment each berry from 3D point cloud of whole bunch; 
-(2) point cloud completion module that complete the missing part of segmentated berry point cloud data; 
+(2) point cloud completion module that complete the missing part of segmented berry point cloud data; 
 (3) phenotyping module that extract berry phenotypic traits such as radius and volume. 
 And at the end, the pipeline has been tested on four different fresh grape species (Red, Green, Kyoho, and Shine Muscat Grape).
 
@@ -676,17 +678,20 @@ Further, it can understand the phenotypic change law of crops under a natural gr
 \section*{CRediT authorship contribution statement}
 \textbf{Wenli Zhang}: conceptualisation, methodology, supervision, funding acquisition, project administration, writing - review; \textbf{Chao Zheng}: methodology, software, data curation, writing - original draft \& editing; \textbf{Chenhuizi Wang}: data curation, software; \textbf{Pieter M. Blok}: methodology, supervision, writing - review \& editing; \textbf{Haozhou Wang}: methodology, writing - review \& editing; \textbf{Wei Guo}: conceptualisation, methodology, funding acquisition, supervision, writing - review \& editing.
 
+\section*{Declaration of generative AI and AI-assisted technologies in the writing process.}
+During the preparation of this work the author(s) used ChatGPT in order to check grammar, spelling, and improve fluency. After using this tool/service, the author(s) reviewed and edited the content as needed and take(s) full responsibility for the content of the published article.
+
 \section*{Declaration of competing interest}
 The authors declare that they have no known competing financial interests or personal relationships that could have appeared to influence the work reported in this paper.
 
 \section*{Data availability}
-The dataset, model weight and code will be made available on request.
+The dataset and model weight will be available on request.
 
 \section*{Funding}
-This study is partially funded by the ...
+This study was partially supported by the National Natural Science Foundation of China (NSFC) Program 62276009 and the Japan Science and Technology Agency (JST) AIP Acceleration Research JPMJCR21U3.
 
 \section*{Acknowledgements}
-We would like to thank ... \citep{blok_highthroughput_2025}
+We would like to thank ...
 
 {\clearpage}
 
