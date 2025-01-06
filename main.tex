@@ -177,6 +177,7 @@ The characteristics of them are shown in Table~\ref{tbl:1} and the examples are 
 \end{figure}
 
 \subsubsection{3D reconstruction of grape}
+\label{sec:212}
 
 In this paper, the multi-view images acquisition and 3D reconstruction by Agisoft Metashape (Agisoft LLC, St. Petersburg, Russia) was used to obtain the 3D point cloud of bunch (Fig.~\ref{fig:raw9}a) and single complete berry (Fig.~\ref{fig:raw9}b). 
 Their correspondence of the same berry was also labelled as shown in Figure~\ref{fig:raw9}c
@@ -223,6 +224,7 @@ Examples of the point cloud of bunch, multiple berries, and single complete berr
 \end{figure}
 
 \subsection{Berry Instance Segmentation}
+\label{sec:22}
 
 As Figure~\ref{fig:raw1}a, the single-bunch shell point cloud was represented as $P_{bunch}=\{p_i \mid i=1, \cdots, m\}$, where $p_i=(x_i,y_i,z_i)$ denotes a point in 3D space and $m$ denotes the total number of points in the point cloud of the bunch. The bunch point cloud segmentation task expects to segment $P_{bunch}$ into a combination of several individual subsets of the berries point cloud and a subset of the stem point cloud, as shown in Equation~(\ref{eq:1}).
 
@@ -254,9 +256,7 @@ SoftGroup contains two aspects of design:
 (2) a threshold score was used to judge the boundary of the point to avoid point category misclassification. 
 Therefore, it is suitable for use in a bunch where there is a tight connection boundary among the berries.
 
-In order to train and validate SoftGroup, each berry and stem in the bunch point cloud obtained in
-% todo
-Section 2.1.2 was labeled at the instance-level (Fig.~\ref{fig:raw11}). 
+In order to train and validate SoftGroup, each berry and stem in the bunch point cloud obtained in Section~\ref{sec:212} was labeled at the instance-level (Fig.~\ref{fig:raw11}). 
 This paper collected and labeled 8 bunches for each of the four species (total 32 bunches). 
 In the sample division, 5 grape bunches of each species (total 20) are randomly selected and used as training samples, the remaining 12 bunches are used for validation.
 
@@ -286,9 +286,7 @@ The whole workflow of proposed GrapeCPNet is shown in Figure~\ref{fig:raw3}.
 \subsubsection{Self-supervised training data generation}
 
 The point cloud completion network often requires the incomplete-complete data pairs of the same object to build a mapping relationship. 
-In this paper, the complete grapes were obtained by single berry reconstruction 
-%todo
-(Section 2.1.2) and were used as ground truth, while the incomplete grapes were cut from the complete grapes following characteristic of occlusion and were used as training inputs. 
+In this paper, the complete grapes were obtained by single berry reconstruction (Section~\ref{sec:212}) and were used as ground truth, while the incomplete grapes were cut from the complete grapes following characteristic of occlusion and were used as training inputs. 
 This data pair generation strategy saved huge amounts of data annotation. The common incomplete characteristics of the berry are shown in Figure~\ref{fig:raw4}.
 Based on the incomplete characteristics, we developed a cutting method for the complete berry point cloud to generate the incomplete berry point cloud.
 
@@ -346,12 +344,9 @@ Thus, a total of 644 complete samples are obtained.
 Each complete berry point cloud has 5 incomplete berry point clouds corresponding to it, and a total of 3220 training data pairs are obtained. 
 For the training and testing of the model, this paper divides the dataset according to a ratio close to 7:3, with a total of 450 complete berry point clouds (2250 training data pairs) to train the network and 194 complete berry point clouds (970 testing data pairs) to test.
 
-For the model inference validation, among 12 testing grape bunches of the berry instance segmentation model 
-%todo
-(Section 2.2), each grape species was randomly selected one bunch (total 4 bunches). 
+For the model inference validation, among 12 testing grape bunches of the berry instance segmentation model (Section~\ref{sec:22}), each grape species was randomly selected one bunch (total 4 bunches). 
 For each bunch, 27 berries are randomly selected, and finally obtain a total of 108 incomplete berries as the input data for completion network inference validation. 
-By checking the labels of these berries, the corresponding single complete berry reconstruction results %todo
-(Section 2.1.2 \& Fig.~\ref{fig:raw9}c) were used as ground truth.
+By checking the labels of these berries, the corresponding single complete berry reconstruction results (Section~\ref{sec:212} \& Fig.~\ref{fig:raw9}c) were used as ground truth.
 
 \subsubsection{GrapeCPNet structure}
 
@@ -456,8 +451,7 @@ At the same time, the volume of the berry can be calculated as shown in Equation
     \label{eq:7}
 \end{equation}
 
-In order to validate the accuracy of extracted morphological traits, those 12 validation bunches in %todo
-Section 2.2 were continuously used after instance berry segmentation and berry completion. 
+In order to validate the accuracy of extracted morphological traits, those 12 validation bunches in Section~\ref{sec:22} were continuously used after instance berry segmentation and berry completion. 
 The radius and volume of the 108 samples are calculated. 
 For ground truth measurement, instead of using manual measurement, which has multiple artificial errors in obtaining the true values of actual radius and volume. 
 This paper used the correspond individual complete berry as the ground truth and applied the same method for the radius and volume calculations. 
@@ -467,7 +461,7 @@ This paper used the correspond individual complete berry as the ground truth and
 In this paper, the evaluation metrics for the bunch segmentation, the berry completion, the effectiveness of the number of berries counting, and the calculation of radius and volume in the acquisition of 3D phenotypic parameters are as follows.
 
 \subsubsection{Berry instance segmentation}
-
+\label{sec:251}
 In this paper, we use the format of SoftGroup \citep{vu_softgroup_2022} that is consistent with the S3DIS dataset \citep{armeni_3d_2016} and use the average precision AP \citep{vu_softgroup_2022} as the evaluation metric for berry instance segmentation. In the threshold setting, the average of the APs with selected the IoU (Intersection over Union) from 50\% to 95\% in steps of 5\% is noted as AP@50:5:95.
 
 \subsubsection{Berry self-supervised completion}
@@ -500,7 +494,7 @@ From the above Equation, the higher the F-Score indicates that the two point set
 In addition, in order to verify the efficiency of GrapeCPNet, other classical point cloud completion networks, including PoinTr, SnowFlakeNet, TopNet \citep{tchapmi_topnet_2019}, and GRNet \citep{xie_grnet_2020} are selected as comparison algorithms. 
 
 \subsubsection{Phenotypic traits calculation}
-
+\label{sec:253}
 In order to evaluate the efficiency of the number of berry statistics and the calculation of berry radius and volume, the MAE (Mean Absolute Error) and the coefficient of determination $R^2$ (R-Square) are used to calculate the error between the prediction value and the true value of the sample.
 
 \begin{align}
@@ -518,9 +512,7 @@ In order to validate the efficiency of the method proposed in this paper, the ex
 \subsection{Berry Instance Segmentation Results}
 
 Bunch point cloud segmentation is mainly realized based on SoftGroup, a point cloud segmentation network. 
-This paper calculates the segmentation results for the berry instances and stem instances using the dataset introduced in 
-%todo
-Section 2.2 and the evaluation metrics in Section 2.5.1, as shown in Table~\ref{tbl:3}.
+This paper calculates the segmentation results for the berry instances and stem instances using the dataset introduced in Section~\ref{sec:22} and the evaluation metrics in Section~\ref{sec:251}, as shown in Table~\ref{tbl:3}.
 
 % table 3
 \begin{table}[h]
@@ -612,9 +604,7 @@ Through the above results, the experiments of berry point cloud completion based
 \subsection{Phenotypic Traits Calculation Results}
 
 Based on the method in this paper, the bunch point cloud is used as input, and the acquired 3D phenotypic parameters are the final output, which mainly contains two parts: the bunch-level phenotypic parameters and the berry-level phenotypic parameters.
-In this paper, experiments are conducted to calculate berry radius and volume with the dataset in the evaluation metrics in 
-%todo
-Section 2.5.3.
+In this paper, experiments are conducted to calculate berry radius and volume with the dataset in the evaluation metrics in Section~\ref{sec:253}.
 The radius parameters are calculated by fitting the berry to the surface of an ellipsoid, as shown in Figure~\ref{fig:raw16}.
 
 % figure 16
@@ -626,9 +616,7 @@ The radius parameters are calculated by fitting the berry to the surface of an e
 \end{figure}
 
 Three lengths of the radius of the berry can be obtained by fitting the predicted point cloud of the complete berry shell to the surface of an ellipsoid. 
-Meanwhile, the point cloud data acquisition method in 
-%todo
-Section 2.1.2 can translate the scale of the point cloud space to the real world, so as to get the real radius length of the berry.
+Meanwhile, the point cloud data acquisition method in Section~\ref{sec:212} can translate the scale of the point cloud space to the real world, so as to get the real radius length of the berry.
 Because of the large difference between the ratio of the long and short axis of different species, this paper conducted experiments on the calculation of the axis length of four species respectively, as shown in Figure~\ref{fig:raw17}.
 
 % figure 17
