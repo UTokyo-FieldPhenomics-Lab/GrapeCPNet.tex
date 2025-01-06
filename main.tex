@@ -109,25 +109,25 @@ The aggregated cluster growth \citep{du_instance_2023} causes the berries to squ
 Therefore, point cloud instance segmentation can only capture partial information rather than that of whole berries.
 
 To address the issue of partial point clouds, point cloud shape completion is one of the most commonly employed solutions.
-\citet{ge_symmetrybased_2020} assume that strawberries are symmetrical, suggesting that their shape can be completed by mirroring the existing shape, provided an appropriate symmetrical plane can be identified.
-\citet{marangoz_fruit_2022} proposed an super-ellipsoids matching approach to map fruits on plants and estimate their shape.
-However, these methods are limited to specific fruit characteristics and require manual design of algorithms tailored to the features of the fruit, lacking the potential for generalized application.
-some researchers applied deep learning-based point cloud completion \citep{wang_unsupervised_2021}. 
 Point cloud completion is the task of generating a complete 3D shape given partial point cloud input \citep{tesema_point_2024}. 
+For instance, \citet{ge_symmetrybased_2020} assume that strawberries are symmetrical, suggesting that their shape can be completed by mirroring the existing shape, provided an appropriate symmetrical plane can be identified.
+\citet{marangoz_fruit_2022} proposed an super-ellipsoids matching approach to map fruits on plants and estimate their shape.
+However, these methods are limited to specific fruit characteristics and require manual design of algorithms according to the features of the fruit, lacking the potential for generalized application.
+some researchers applied deep learning-based point cloud completion \citep{wang_unsupervised_2021}. 
 Utilizing deep learning methods, researchers have designed point cloud completion networks. 
 \citet{park_deepsdf_2019} introduced DeepSDF to achieve the completion of object point cloud models. It uses a learned continuous signed distance function to represent a class of shapes in latent space and is tolerant to noisy 3D input data. 
 \citet{magistri_contrastive_2022} utilized a latent space of potential fruit appearances and propose an encoder-decoder network that converted a single RGB-D frame to a 3D shape of a complete fruit. 
 This network was extended and upgraded by \citet{blok_highthroughput_2025} for high-throughput 3D shape completion of potato tubers on a commercial harvester.
 \citet{tang_lakenet_2022} proposed a point cloud completion network Lake-net for furniture model point cloud datasets. 
 For grape berry application, the shape of the berry can roughly approach the deformation of a sphere or ellipsoid depending on the species, and its surface consists of multiple spherical surfaces of varying curvature, with a rich characterization of details. 
-The existing datasets from other fruits cannot be applied directly, and manually creating paired training datasets is time-consuming and labor-intensive \citep{blok_highthroughput_2025}.
+The existing datasets from other fruits cannot be applied directly, and manually creating paired training datasets is time-consuming and labor-intensive.
 Therefore, there is a demand to develop a network and pipeline, capable of completing the detailed surface of an incomplete berry point cloud while requiring less labor-intensive training data preparation.
 
 In this study, we proposed a berry-level 3D grape phenotyping pipeline that will overcome the occlusion issue. 
 The proposed pipeline includes: 
-(1) individual berry segmentation module that segment each berry from 3D point cloud of whole bunch; 
-(2) point cloud completion module that complete the missing part of segmented berry point cloud data; 
-(3) phenotyping module that extract berry phenotypic traits such as radius and volume. 
+(1) a individual berry segmentation module that segment each berry from 3D point cloud of whole bunch; 
+(2) a point cloud completion module that complete the missing part of segmented berry point cloud data through automatic training data generation; 
+(3) a phenotyping module that extract berry phenotypic traits such as radius and volume. 
 And at the end, the pipeline has been tested on four different fresh grape species (Red, Green, Kyoho, and Shine Muscat Grape).
 
 \section{Materials and Methods}
@@ -236,7 +236,7 @@ P_{bunch} = \sum_{i=1}^{n} P_{berry_{i}} + P_{stem}
 \end{equation}
 
 {\raggedright where, $P_{berry_{i}}$ denotes the subset point cloud of the $i^{\text{th}}$ berry in the bunch, $n$ denotes the number of all the berries contained in the bunch, and $P_{stem}$ denotes the set of stem point cloud. 
-Meanwhile, each subset $P_{berry_{i}}=\{p_j \mid j=1, \cdots, k\}$ consists of multiple points in 3D space, which can represent the location and morphology of the visible part of the berry within the bunch.}
+Meanwhile, each subset $P_{berry_{i}}=\{p_i \mid i=1, \cdots, k\}$ consists of multiple points in 3D space, which can represent the location and morphology of the visible part of the berry within the bunch.}
 
 The task of instance berry segmentation from a bunch is complex. 
 As shown in Figure~\ref{fig:raw2}, it involves distinct localization features and complex boundary morphology. 
@@ -317,17 +317,17 @@ Continue the previous cut looping until meet the cut limits. The cut incomplete 
     \KwData{$n$ \tcp{generate incomplete berries number}}
     \KwResult{$P_{\text{output}} = \{P_{o_i} \mid i = 1, \cdots, n\}$ \tcp{incomplete berry point cloud sets} }
     
-    $\hat{P_C} \gets Normalize(Translate(P_C))$ \tcp{center to $(0,0,0)$, range to $[-0.5, 0.5]$}
+    $\hat{P}_C \gets \text{Normalize}(\text{Translate}(P_C))$ \tcp{center to $(0,0,0)$, range to $[-0.5, 0.5]$}
     \For{$i = 0 \to n$}{
         set $m = \text{random}\{1,2,3,4,5\}$ \tcp{cut incomplete single berry $m$ times}
-        $P_{o_i} \gets copy(\hat{P_C})$ \tcp{initialize one output}
+        $P_{o_i} \gets copy(\hat{P}_C)$ \tcp{initialize one output}
         \For{$j = 0 \to m$}{
-            set $O = \{(x_o, y_o, z_o) \mid x, y, z \in \text{random}[-0.75, 0.75]\}$ \tcp{center variable} 
-            set $R = \text{random}[0.25, 0.75]$ \tcp{radius variable}
-            set $M_S \gets sphere(O, R)$ \tcp{genreate sphere cut model}
+            set $O = \{(x_o, y_o, z_o) \mid x, y, z \in \text{random}[-0.75, 0.75]\}$ \tcp{center} 
+            set $R = \text{random}[0.25, 0.75]$ \tcp{radius}
+            set $M_S \gets \text{sphere}(O, R)$ \tcp{genreate sphere cut model}
             $P_{o_i} = P_{o_i} - P_{o_i} \cap M_S$ \tcp{remove overlap with cut shpere model}
         }
-        $P_{o_i} \in P_{\text{output}}$ \tcp{add to output set}
+        $P_{\text{output}_i} \gets P_{o_i}$ \tcp{add to output set}
     }
 \end{algorithm}
 
@@ -576,11 +576,11 @@ The visualization of using GrapeCPNet to complement the incomplete berry segment
         \hline
         \multirow{2}{*}{TopNet} & Test & 23.019 & 0.201 & 0.200 & 0.201 \\
         \cline{2-6}
-        & Inference & 31.88 & 0.155 & 0.154 & 0.154 \\
+        & Inference & 31.880 & 0.155 & 0.154 & 0.154 \\
         \hline
-        \multirow{2}{*}{GRNet} & Test & 19.24 & 0.402 & 0.392 & 0.397 \\
+        \multirow{2}{*}{GRNet} & Test & 19.240 & 0.402 & 0.392 & 0.397 \\
         \cline{2-6}
-        & Inference & 21.25 & 0.365 & 0.363 & 0.364 \\
+        & Inference & 21.250 & 0.365 & 0.363 & 0.364 \\
         \hline
         \multirow{2}{*}{GrapeCPNet (\textbf{Ours})} & Test & \textbf{8.315} & \textbf{0.729} & \textbf{0.772} & \textbf{0.751} \\
         \cline{2-6}
@@ -679,7 +679,7 @@ Further, it can understand the phenotypic change law of crops under a natural gr
 \textbf{Wenli Zhang}: conceptualization, methodology, supervision, funding acquisition, project administration, writing - review; \textbf{Chao Zheng}: methodology, software, data curation, writing - original draft \& editing; \textbf{Chenhuizi Wang}: data curation, software; \textbf{Pieter M. Blok}: methodology, supervision, writing - review \& editing; \textbf{Haozhou Wang}: methodology, writing - review \& editing; \textbf{Wei Guo}: conceptualization, methodology, funding acquisition, supervision, writing - review \& editing.
 
 \section*{Declaration of generative AI and AI-assisted technologies in the writing process.}
-During the preparation of this work the author(s) used ChatGPT in order to check grammar, spelling, and improve fluency. After using this tool/service, the author(s) reviewed and edited the content as needed and take(s) full responsibility for the content of the published article.
+During the preparation of this work the authors used ChatGPT in order to check grammar, spelling, and improve fluency. After using this tool/service, the authors reviewed and edited the content as needed and take full responsibility for the content of the published article.
 
 \section*{Declaration of competing interest}
 The authors declare that they have no known competing financial interests or personal relationships that could have appeared to influence the work reported in this paper.
