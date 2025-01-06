@@ -149,7 +149,7 @@ Finally, we introduced the evaluation method for model training and results vali
 \subsubsection{Grape species selection}
 
 To ensure the generality and applicability of the study, this paper considers the sparsity, shape, and color of the bunch, and chooses four common fresh grapes as the experimental materials, which are Red Grape, Green Grape, Kyoho Grape, and Shine-Muscat Grape. 
-The characteristics of them are shown in Table~\ref{tlb:1} and the examples are shown in Figure~\ref{fig:raw86}.
+The characteristics of them are shown in Table~\ref{tbl:1} and the examples are shown in Figure~\ref{fig:raw86}.
 
 % table 1
 \begin{table}[h]
@@ -164,7 +164,7 @@ The characteristics of them are shown in Table~\ref{tlb:1} and the examples are 
         Kyoho & Dark-purple & Dense & Sphere \\
         Shine-Muscat & Green & Very dense & Sphere \\
         \hline
-    \label{tlb:1}
+    \label{tbl:1}
     \end{tabular}
 \end{table}
 
@@ -196,7 +196,7 @@ In addition, a ruler with markers were used for scale correction.
 For single complete berry multi-view images acquisition in batch (Fig.~\ref{fig:raw9}b). 
 Nine berries were fixed floating by needle disk (Fig.~\ref{fig:raw9}b1) on a turntable device (Fig.~\ref{fig:raw9}b2). 
 The background, cameras, and marker settings are similar to the previous bunch reconstruction. 
-The number of reconstructed images and the shooting parameters are selected, as shown in Table~\ref{tlb:2}. 
+The number of reconstructed images and the shooting parameters are selected, as shown in Table~\ref{tbl:2}. 
 Examples of the point cloud of bunch, multiple berries, and single complete berries from multiple berries are shown in Figure~\ref{fig:raw10}.
 
 % table 2
@@ -210,7 +210,7 @@ Examples of the point cloud of bunch, multiple berries, and single complete berr
         Bunch        & 25-60cm & $0^{\circ}$, $\pm 25^{\circ}$, $\pm 45^{\circ}$ & $5 \times 50$ \\
         Single berry & 20-40cm & $-15^{\circ}$, $0^{\circ}$, $25^{\circ}$, $45^{\circ}$ & $4 \times 50$ \\
         \hline
-    \label{tlb:2}
+    \label{tbl:2}
     \end{tabular}
 \end{table}
 
@@ -520,7 +520,7 @@ In order to validate the efficiency of the method proposed in this paper, the ex
 Bunch point cloud segmentation is mainly realized based on SoftGroup, a point cloud segmentation network. 
 This paper calculates the segmentation results for the berry instances and stem instances using the dataset introduced in 
 %todo
-Section 2.2 and the evaluation metrics in Section 2.5.1, as shown in Table~\ref{tlb:3}.
+Section 2.2 and the evaluation metrics in Section 2.5.1, as shown in Table~\ref{tbl:3}.
 
 % table 3
 \begin{table}[h]
@@ -535,9 +535,10 @@ Section 2.2 and the evaluation metrics in Section 2.5.1, as shown in Table~\ref{
         & Stem & 0.941 \\
         \hline
     \end{tabular}
+    \label{tbl:3}
 \end{table}
 
-As can be seen from Table~\ref{tlb:3}, the AP value of the point cloud instance segmentation for the berry category is over 99\%, which shows a high accuracy of the berry segmentation from the bunch. The visualization results of four fresh grapes for bunch point cloud segmentation using SoftGroup are shown in Figure~\ref{fig:raw13}.
+As can be seen from Table~\ref{tbl:3}, the AP value of the point cloud instance segmentation for the berry category is over 99\%, which shows a high accuracy of the berry segmentation from the bunch. The visualization results of four fresh grapes for bunch point cloud segmentation using SoftGroup are shown in Figure~\ref{fig:raw13}.
 
 % figure 13
 \begin{figure}[hbt!]
@@ -559,7 +560,7 @@ Therefore, in order to verify the efficiency of berry point cloud completion in 
 
 
 Meanwhile, since the point cloud obtained after berry picking is used as the ground truth, the point cloud alignment is performed to calculate evaluation metrics of the predicted complete berry point cloud with the ground truth.
-The experimental results of comparing to other point cloud completion algorithms are shown in Table~\ref{tlb:4}. 
+The experimental results of comparing to other point cloud completion algorithms are shown in Table~\ref{tbl:4}. 
 GrapeCPNet achieves the best results under the self-supervised training method in both the training phase and the application phase, better than the other comparative algorithms. 
 The visualization of using GrapeCPNet to complement the incomplete berry segmented from the bunch in the application phase is shown in Figure~\ref{fig:raw14}.
 
@@ -592,6 +593,7 @@ The visualization of using GrapeCPNet to complement the incomplete berry segment
         & Inference & \textbf{9.158} & \textbf{0.685} & \textbf{0.696} & \textbf{0.689} \\
         \hline
     \end{tabular}
+    \label{tbl:4}
 \end{table}
 
 % figure 14
