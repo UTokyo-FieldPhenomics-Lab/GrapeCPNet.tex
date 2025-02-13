@@ -9,6 +9,9 @@
 %\usepackage[utf8]{inputenc}
 \usepackage{natbib}
 
+% final or draft
+\usepackage[draft]{changes}
+
 \usepackage{cite}
 \usepackage[ruled]{algorithm2e}
 \usepackage{amsmath,amssymb,amsfonts}
@@ -44,7 +47,8 @@
 \begin{document}
 
 % Title
-\title{GrapeCPNet: A deep learning integration for grape completion and phenotyping in 3D}
+% \title{GrapeCPNet: A deep learning integration for grape completion and phenotyping in 3D}
+\title{\added{GrapeCPNet: A Self-supervised Point Cloud Completion Network for 3D Phenotyping of Grape Bunches}}
 \author{
     Wenli Zhang \textsuperscript{a,*},
     Chao Zheng \textsuperscript{a},
@@ -65,6 +69,22 @@
 \textsuperscript{b} Graduate School of Agricultural and Life Sciences, The University of Tokyo, Tokyo, Japan\\
 % \textsuperscript{*} \\
 
+\textbf{\added{Highlights}}
+
+
+\begin{itemize}
+%   \item Novel deep learning pipeline for automated 3D grape phenotyping.
+%   \item GrapeCPNet: Self-supervised network for berry points cloud completion.
+%   \item High accuracy in berry instance segmentation (99.5\% average precision).
+%   \item Robust performance across four grape varieties ($R^2$ of 0.855 for radius, 0.969 for 
+% volume).
+%   \item Nondestructive and highthroughput analysis for viticulture applications.
+  \item \added{GrapeCPNet completes 3D point clouds for segmented berry instances.}
+  \item \added{GrapeCPNet is trained using self-supervision, free of manual annotations.}
+  \item \added{Integrated into a deep learning pipeline for automated 3D grape bunch phenotyping.}
+  \item \added{Achieved over 0.85 $R^2$ and 99.5\% average precision on four grape varieties.}
+\end{itemize}
+
 \begin{abstract}
 The measurement of phenotypic parameters of fresh grapes, especially at the individual berry level, is critical for yield estimation and quality control. 
 Currently, these measurements are done by humans, making it costly, labor-intensive, and often inaccurate. 
@@ -82,12 +102,12 @@ These results demonstrate the potential of the proposed method for rapid and pra
 \doublespacing
 
 \section{Introduction}
-Fresh grape is one of the most important agricultural products and economic crops \citep{alston_grapes_2019, venkitasamy_grapes_2019}. 
+Fresh grape is one of the most important agricultural products and economic crops \citep{alston_grapes_2019}. 
 Its global production and consumption is increasing year by year. 
-To better guide planting strategy and monitoring growing status, several geometric parameters like counts, length, and volume at bunch level and berry level are commonly used in actual applications. \citep{luo_prediction_2024,raihen_prediction_2024,kamangir_largescale_2024,barbole_comparative_2023}. 
+To better guide planting strategy and monitoring growing status, several geometric parameters like counts, length, and volume at bunch level and berry level are commonly used in actual applications. \citep{luo_prediction_2024,raihen_prediction_2024}. 
 Among them, the number and the radius of the berries are the most important phenotypic parameters \citep{sneha_acrescale_2024}. 
 Traditional manual phenotyping of traits is labor-intensive and time-consuming, and often destructive. 
-To reduce the cost and increase the efficiency, the non-destructive and high-throughput acquisition of phenotypic traits based on computer vision has attracted extensive interest in recent years \citep{li_review_2020}. 
+To reduce the cost and increase the efficiency, the non-destructive and high-throughput acquisition of phenotypic traits based on computer vision has attracted extensive interest in recent years. 
 Several simple geometry traits can be acquired from 2D images by using computer vision algorithms that use pattern recognition, machine learning, and deep learning \citep{zabawa_counting_2020}. 
 Projecting the 2D image plane onto the 3D world inevitably results in information loss. 
 The occlusion of berries often lead to incomplete representations of grape bunches. 
@@ -97,17 +117,18 @@ Advances in 3D scanning and reconstruction techniques have made it possible to r
 Researchers have developed 3D phenotyping processes for grapes by combining feature-engineered point cloud processing algorithms \citep{rose_automated_2016,rist_highprecision_2018}. 
 These methods primarily rely on point cloud segmentation techniques, such as edge-based segmentation, region-growing segmentation, and sphere-fitting algorithms. 
 Unfortunately, traditional point cloud processing algorithms heavily rely on prior knowledge of the target object and require extensive manual feature engineering and parameter tuning to achieve optimal results in a wide range of conditions, thereby limiting their generalization performance.
+\added{Implementing} state-of-the-art deep learning approaches\replaced{, which automatically learn features}{use a data-driven feature learning} from the point cloud data \replaced{, can  reduce the workload of designing robust algorithms for complex and diverse conditions}{ automatically}.
+\deleted{It recently shows promising adaptability and accuracy in plant 3D phenotyping (schneider\_predicting\_2020, scholer\_automated\_2015). }
+\deleted{Focusing on point cloud segmentation applications, }
+\deleted{li\_maspc\_2022 proposed MASPC\_Transform to segment the stems and leaves of rose bush point cloud data to obtain 3D phenotypic parameters. }
+\deleted{wang\_3d\_2022 realized leaf instance segmentation by designing the PartNet for lettuce point cloud data. }
+\deleted{li\_psegnet\_2022 proposed PSegNet for segmenting stems and leaves of tomato, tobacco, and sorghum. }
+\replaced{However, few studies have reported deep learning networks perform well in}{The previous studies focused on canopy level or individual plant level analysis, and demonstrated that instance segmentation alone is insufficient on} berry level analysis. 
 
-State-of-the-art deep learning approaches use a data-driven feature learning from the point cloud data automatically. 
-It recently shows promising adaptability and accuracy in plant 3D phenotyping \citep{schneider_predicting_2020,scholer_automated_2015,rostami_survey_2019,du_pst_2023}. Focusing on point cloud segmentation applications, 
-\citet{li_maspc_2022} proposed MASPC\_Transform to segment the stems and leaves of rose bush point cloud data to obtain 3D phenotypic parameters. 
-\citet{wang_3d_2022} realized leaf instance segmentation by designing the PartNet for lettuce point cloud data. 
-\citet{li_psegnet_2022} proposed PSegNet for segmenting stems and leaves of tomato, tobacco, and sorghum. 
-The previous studies focused on canopy level or individual plant level analysis, and demonstrated that instance segmentation alone is insufficient on berry level analysis. 
-The aggregated cluster growth \citep{du_instance_2023} causes the berries to squeezed against each other, leading to self occlusion and resulting in an incomplete point cloud of berry surfaces. 
+\added{Another challenge after the success of instance berry segmentation is the incomplete representation of berry surfaces.} 
+The aggregated cluster growth causes the berries to squeezed against each other, leading to self occlusion and resulting in an incomplete point cloud of berry surfaces \citep{du_instance_2023}. 
 Therefore, point cloud instance segmentation can only capture partial information rather than that of whole berries.
-
-To address the issue of partial point clouds, and consequently an underestimation of the berry traits, point cloud shape completion is one of the most commonly used solutions.
+To address \replaced{this issue}{the issue of partial point clouds,} and consequently an underestimation of the berry traits, point cloud shape completion is one of the most commonly used solutions.
 Point cloud completion is the task of generating a complete 3D shape given partial point cloud input \citep{tesema_point_2024}. 
 For instance, \citet{ge_symmetrybased_2020} assume that strawberries are symmetrical, suggesting that their shape can be completed by mirroring the existing shape, provided an appropriate symmetrical plane can be identified.
 \citet{marangoz_fruit_2022} proposed an super-ellipsoids matching approach to map fruits on plants and estimate their shape.
@@ -125,7 +146,7 @@ The proposed pipeline includes:
 (1) a individual berry segmentation module that segment each berry from 3D point cloud of whole bunch; 
 (2) a point cloud completion module that complete the missing part of segmented berry point cloud data through automatic training data generation; 
 (3) a phenotyping module that extract berry phenotypic traits including radius and volume. 
-The novelty of our study is the research of this novel pipeline and its evaluation on four different fresh grape species (Red, Green, Kyoho, and Shine Muscat Grape).
+\replaced{The proposed pipeline was evaluated}{The novelty of our study is the research of this novel pipeline and its evaluation} on four different fresh grape species (Red, Green, Kyoho, and Shine Muscat Grape).
 
 \section{Materials and Methods}
 
@@ -222,7 +243,7 @@ Examples of the point cloud of bunch, multiple berries, and single complete berr
     \label{fig:raw10}
 \end{figure}
 
-\subsection{Berry Instance Segmentation}
+\subsection{Berry Instance Segmentation \added{Module}}
 \label{sec:22}
 
 As Figure~\ref{fig:raw1}a, the single-bunch shell point cloud was represented as $P_{bunch}=\{p_i \mid i=1, \cdots, m\}$, where $p_i=(x_i,y_i,z_i)$ denotes a point in 3D space and $m$ denotes the total number of points in the point cloud of the bunch. The bunch point cloud segmentation task expects to segment $P_{bunch}$ into a combination of several individual subsets of the berries point cloud and a subset of the stem point cloud, as shown in Equation~(\ref{eq:1}).
@@ -267,10 +288,10 @@ Five grape bunches per grape specie (in total 20) were randomly selected and use
     \label{fig:raw11}
 \end{figure}
 
-\subsection{Self-Supervised Point Cloud Completion}
+\subsection{Self-Supervised Point Cloud Completion \added{Module}}
 
 The self-supervised training-based berry point cloud completion was used to predict their complete 3D model. 
-Self-supervised learning is a way of training a model without annotations by clustering the data in unsupervised manners\citep{fei_selfsupervised_2023}. 
+Self-supervised learning is a way of training a model without annotations by clustering the data in unsupervised manners. 
 The following section summarizes the self-supervised strategy for the paired training data. It is followed by a description of the grape completion network, GrapeCPNet (Figure~\ref{fig:raw3}).
 
 % figure 3
@@ -461,11 +482,11 @@ In this paper, the metrics for the bunch segmentation, berry completion, berry c
 
 \subsubsection{Berry instance segmentation}
 \label{sec:251}
-In this paper, we used average precision AP as the evaluation metric for berry instance segmentation (similar to the original paper of \citep{vu_softgroup_2022}). The average APs with IoU (Intersection over Union) ranging from 50\% to 95\% in steps of 5\% were used and noted as AP@50:5:95.
+In this paper, we used average precision AP as the evaluation metric for berry instance segmentation, similar to the original paper of \citet{vu_softgroup_2022}. The average APs with IoU (Intersection over Union) ranging from 50\% to 95\% in steps of 5\% were used and noted as AP@50:5:95.
 
 \subsubsection{Berry self-supervised completion}
 
-In this paper, we use the chamfer distance (CD-distance) and F-Score to measure the effect of berry completion (similar to the original paper of \citep{yu_pointr_2021}). 
+In this paper, we use the chamfer distance (CD-distance) and F-Score to measure the effect of berry completion,  similar to the original paper of \citet{yu_pointr_2021}. 
 For each sample, the chamfer distance $d_{CD}$ between the predicted point set $P$ and the true point set $G$ was calculated as shown in Equation~(\ref{eq:8})
 
 \begin{equation}
@@ -661,6 +682,10 @@ This plays an important role in plant breeding, cultivation management, and yiel
 Secondly, the point cloud data analysis technology based on 3D reconstruction has a wide application of field crop analysis. 
 Through the designed data acquisition method and related technologies, combined with the actual field crop growing environment, the growth process can be monitored and analyzed in real-time. 
 Further, it can help understanding the phenotypic change of crops in natural growing environments, providing better and objective measures for crop production and quality control. 
+
+\section{Conclusions}
+
+aaa
 
 
 \section*{CRediT authorship contribution statement}
