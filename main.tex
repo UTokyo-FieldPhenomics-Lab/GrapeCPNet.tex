@@ -6,6 +6,7 @@
 \usepackage{hyperref}
 \usepackage{lineno}
 \usepackage{makecell}
+\usepackage[T1]{fontenc}
 
 %\usepackage[utf8]{inputenc}
 \usepackage{natbib}
@@ -305,6 +306,7 @@ The following section summarizes the self-supervised strategy for the paired tra
 \end{figure}
 
 \subsubsection{Self-supervised training data generation}
+\label{sec:berrycut}
 
 Supervised point cloud completion training requires the incomplete-complete data pairs of the same object to build a mapping relationship. 
 In this paper, the complete grapes were obtained by single berry reconstruction (Section~\ref{sec:212}) and were used as ground truth, while the incomplete grapes were cut from the complete grapes following characteristic of occlusion and were used as training inputs. 
@@ -548,7 +550,7 @@ The lower the MAE, the closer the prediction value is to the true value. The val
 To validate the efficiency of our method, the experiments were conducted on each component separately, including the result of bunch point cloud segmentation, the result of berry point cloud completion based on self-supervised training, and the result of obtaining the phenotypic traits.
 
 \subsection{Berry Instance Segmentation Results}
-\label{sec: insegresults}
+\label{sec:insegresults}
 
 \deleted{The bunch point cloud segmentation results are summarized in Table~\ref{tbl:3} }. 
 % table 3
@@ -584,6 +586,7 @@ The results of four fresh grapes for bunch point cloud segmentation are visualiz
 \end{figure}
 
 \subsection{Berry Self-Supervised Completion Results}
+\label{sec:32}
 
 The berry point cloud completion experiments are divided into two parts according to the different phases of the network: 
 the results of the self-supervised training \added{(Test)} and the results of the practical application \added{(Inference)}.
@@ -710,24 +713,34 @@ In this paper, \replaced{an automated deep learning pipeline for}{a method for t
 \added{The normal directions derived from the point clouds were then packed as an additional feature in the PointNet++ network for point cloud segmentation.}
 \added{In this study, we applied the state-of-the-art point cloud segmentation network, SoftGroup \citep{vu_softgroup_2022} directly to the problem.}
 \added{The primary time-consuming work of our approach was the annotation of 3D data for instance segmentation.}
-\added{Compared to similar studies on grape berries, our proposed method demonstrated superior performance, achieving the best results among the reviewed methods (Subsection~\ref{sec: insegresults}).}
+\added{Compared to similar studies on grape berries, our proposed method demonstrated superior performance, achieving the best results among the reviewed methods (Subsection~\ref{sec:insegresults}).}
 
-\added{For berry completetion by deep learning, the most difficult and time-consuming work is preparing the paired training dataset with complete and incomplete point cloud.}
-\added{As our previous studies conducted for potato tuber completion networks \citep{blok_highthroughput_2025}, a distinguishable pin was used as reference point for pairing complete tubers by photogrammetry and incomplete tubers by RGBD camera.}
-\added{Then the pin-guided point cloud matching algorithm is applied to calculate transformation matrix between paired dataset.}
-\added{The potato tuber is single object with clear texture and shape variances, thus pairing through two different scans by two sensors is not too difficult.}
-\added{For the grape berry, it is super rounded with weak texture features and strong reflectance, making the paired data super challenging.}
-\added{Thus, the previous pin-guided point cloud paring methods for collection paired data does not work.}
+\added{For berry completion using deep learning, the most challenging and time-consuming task is preparing the paired training datasets of complete and incomplete point clouds.}
+\added{In our previous work on potato tuber completion networks \citep{blok_highthroughput_2025}, a distinguishable pin was used as a reference point to align the complete tuber scans obtained via photogrammetry with the incomplete tuber scans captured using an RGB-D camera.}
+\added{A pin-guided point cloud matching algorithm was then applied to calculate the transformation matrix for pairing the datasets.}
+\added{Potato tubers, being single objects with clear textures and shape variation, presented fewer challenges when aligning data collected by two different types of sensors.}
+\added{However, grape berries pose a significantly more difficult problem due to their highly rounded shapes, weak texture features, and strong reflectance, which complicates the creation of paired data.}
+\added{As a result, the previous pin-guided point cloud pairing method used for potato tuber datasets is not effective for grape berries.}
+\added{Thus, we simulated random sphere cutting on the complete berry point clouds to generate thousands of paired incomplete point clouds, as described in Subsection~\ref{sec:berrycut}.}
+\added{As demonstrated in Subsection~\ref{sec:32}, these automatically generated paired training datasets were successfully used to train several completion models (Table~\ref{tbl:4}).}
+We have found that some researchers \citep{pan_panoptic_2023,magistri_efficient_2024} have improved the completion effect by encoding a prior knowledge of the geometry of the object into the weights of the neural network. 
+\added{Considering the agricultural plant completion task, our proposed GrapeCPNet, which combines centroid-based sparse completion with diffusion-based dense completion, outperformed other networks in terms of performance.}
+We found that GrapeCPNet \replaced{performed a little bit worse}{effective} in the case of \replaced{strange}{complex} berry \replaced{shapes}{appearance}, such as drop-shaped.
+We subsequently consider utilizing the prior knowledge of berry geometry to achieve more detailed morphological feature extraction and representation to improve the quality of completion. 
+
+% challenges, limitations and future works.
+\added{Another limitation of this study is that it focused on a single berry bunch in a controlled environment.}
+The noise in the data is also related to the effectiveness of the method proposed in this paper.
+\added{For practical applications in vineyards, collecting the same point cloud quality as that achieved in controlled indoor environments can be challenging, and multi-view data collection may not be as efficient.}
+How to \added{effectively} implement the method in practical application scenarios\deleted{, such as RGB-D collected point cloud data,} is another issue to be considered in future research.
+\added{To increasing data collection efficiency, devices such as RGB-D cameras \citep{blok_highthroughput_2025}, fisheye cameras \citep{tamura_unsupervised_2025}, or even 360 cameras can be used.}
+\added{Moreover, as in previous studies \citep{rose_automated_2016, luo_3d_2023}, investigating methods to segment individual grape bunches directly from vineyard scans using deep learning techniques should be an area of future exploration.}
+\added{Additionally, \citet[Fig.~9]{scholer_automated_2015} successfully demonstrated the construction of virtual 3D models of grape bunches, including the hidden branching architecture. }
+\added{By collecting time-series growth data, the branching structure could potentially be captured during early stages of thinning, as suggested by \citep{du_instance_2023}.}
+\added{Such data could enable studies on growth prediction for optimizing harvesting times and assessments of branching structure deviations within crowded berry bunches.}
+\added{Finally, applying the latest procedural computer graphics (CG) modeling techniques \citep{karoly_automated_2022} or functional-structural plant models \citep{helmrich_scalable_2024} represents another promising approach to advancing practical applications in this field.}
 
 % the achievement / impact of study / potential applications.
-\deleted{As discussion point, we found that GrapeCPNet was not effective in the case of complex berry appearance, such as drop-shaped.}
-
-% future works.
-We have found that some researchers \citep{pan_panoptic_2023,magistri_efficient_2024} have improved the completion effect by encoding a prior knowledge of the geometry of the object into the weights of the neural network. 
-We subsequently consider utilizing the prior knowledge of berry geometry to achieve more detailed morphological feature extraction and representation to improve the quality of completion. 
-In addition, the noise in the data is also related to the effectiveness of the method proposed in this paper. 
-How to implement the method in practical application scenarios, such as RGB-D collected point cloud data, is another issue to be considered in future research. \citet{blok_highthroughput_2025}
-
 Through the method proposed in this paper, the automated acquisition of 3D phenotypic traits of grape can be realized, which is of great significance in the field of agricultural production and scientific research. 
 First, there are large differences in berry morphology among different species of grape, and accurate reconstruction and analysis at the berry-level can help researchers analyze character differences more accurately. 
 This plays an important role in plant breeding, cultivation management, and yield prediction. 
