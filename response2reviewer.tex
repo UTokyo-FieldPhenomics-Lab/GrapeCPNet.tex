@@ -5,19 +5,31 @@
 \usepackage{array}
 \usepackage{geometry}
 
-% 添加空的参考文献数据库和样式
 \usepackage{natbib}
-\bibliographystyle{plainnat} % 或其他适合的参考文献样式
+
+\newcommand{\papertitle}{GrapeCPNet: A Self-supervised Point Cloud Completion Network for 3D Phenotyping of Grape Bunches}
+\newcommand{\journalname}{Computers and Electronics in Agriculture}
 
 \rfoot{Page \thepage}
-\lettertitle{The Response to Reviewers for Minor Revision}
-\title{Xxxxxx Xxxxxxx Xxxxx Xxx Xxxxxx Xxxxx xxx Xxxxx Xxxx Xxxxxx}
-\author{Xxx Xxx, Member, IEEE, Xxxxx Xxx, Xxx Xxxx, Xxxx xxx, Xxxx xxxxx, Senior Member, IEEE, Xxxxx
-Xxxx}
-\journal{IEEE/ASME TRANSACTIONS ON XXXXXXX}
-\doi{XXXXX-XX-2022-XXXX}
-\corresponding{Xxxxxx Xxxxx}
-\email{XXXXX@xxx.edu.cn}
+\lettertitle{The Response to Reviewers}
+\journal{\journalname}
+\doi{COMPAG-D-25-00311R1}
+
+\title{\papertitle}
+\author{
+    Wenli Zhang \textsuperscript{a,*},
+    Chao Zheng \textsuperscript{a},
+    Chenhuizi Wang \textsuperscript{a},
+    Pieter M. Blok \textsuperscript{b},
+    Haozhou Wang \textsuperscript{b},
+    Wei Guo \textsuperscript{b,*}
+}
+
+\corresponding{Corresponding author: zhangwenli@bjut.edu.cn; guowei@g.ecc.u-tokyo.ac.jp }
+\email{
+    \textsuperscript{a} Information Department, Beijing University of Technology, Beijing, China \\
+    \textsuperscript{b} Graduate School of Agricultural and Life Sciences, The University of Tokyo, Tokyo, Japan
+}
 
 \begin{document}
 
@@ -25,102 +37,145 @@ Xxxx}
     \maketitle
 \end{center}
 
-\BT{To Senior Editor, Technical Editor and Reviewers}
+\BT{To Editor and Reviewers}
 
-\BL{Thank you for giving us the opportunity to submit a revised draft of the manuscript "Xxxxxx Xxxxxxxx Xxxxxx xxx xxxxx Xxxxxx xxxx Xxxxx Xxxx Xxxxxx" for publication in the Journal of IEEE/ASME TRANSACTIONS ON XXXXXXXX. We appreciate the time and effort that editors and the reviewers dedicated to providing feedback on our manuscript and are grateful for the insightful comments and valuable improvements to our paper. We have incorporated most of the suggestions made by the reviewers. Those changes are highlighted within the manuscript. Please see below, for a point-by-point response to the reviewers' comments and concerns. All page numbers refer to the revised manuscript file with tracked changes.}
-
-\section{Senior Editor Comments}
-
-% commet 
-\begin{tcolorbox}[title = {Senior Editor Comments},
-    fonttitle = \bfseries]
-    The three (3) reviewers that have examined the work and the Technical Editor (TE) appreciate the contribution of the paper but have also identified a number of issues that need to be resolved before the paper is ready for acceptance.
-    Those are very well presented in the reviewer report and outlined in the TE's recommendation. I recommend “Publish: Minor Revision” recommending the authors to address all raised issues, if/when they resubmit their work.
-\end{tcolorbox}
-
-% 感谢您对我们工作的认同和建议。如下文所示，我们已经对审稿人所提出的问题逐点进行了修改。
-
-\response{Thank you for your approval of our work and suggestions. As shown below, we have revised the issues raised by the reviewers point by point \cite{wang_3d_2022}}
-
-\section{Technical Editor Comments}
-
-% commet 
-\begin{tcolorbox}[title = {Technical Editor Comments},
-    fonttitle = \bfseries]
-Xxxxxx xxxxx xxxxxx xxxxx Xxxxxx xxxxxxxx xxxxxxxx xxxxxxxx xxxxxxx xxxxxxx xx xxx xxx.
-\end{tcolorbox}
-
-% 感谢您对我们工作的认可，并对审稿人的意见进行了有效的汇总。所有的意见和建议对我们来说都是重要且宝贵的，我们针对这些意见进行了详细而认真的修订。首先对手稿中描述的实验细节以及实现原理上，进行了更加深入的阐述，然后针对一些细节问题进行了必要的修正。
-
-\response{Xxxxx xxxx xxxxxx xxxxxxxxxxx xxx xxxxxxxx xxxxxxxxxx xxxx xxxxxxxx xx.}
+\BL{Thank you for giving us the opportunity to submit a revised draft of the manuscript ``\papertitle'' for publication in the Journal of \journalname. We appreciate the time and effort that editors and the reviewers dedicated to providing feedback on our manuscript and are grateful for the insightful comments and valuable improvements to our paper. We have incorporated most of the suggestions made by the reviewers. Those changes are highlighted within the manuscript. Please see below, for a point-by-point response to the reviewers' comments and concerns. All page numbers refer to the revised manuscript file with tracked changes.}
 
 \section{Reviewer \#1}
 
-% commet 
-\begin{tcolorbox}[title = {The Reviewer's Comment \#1},
-    fonttitle = \bfseries]
-The first reference in Introduction must be checked [?].
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{tcolorbox}[title = {Comment \#1}, fonttitle = \bfseries]
+    Overall, the paper is well structured with a clear goal,  and the authors provide insight to justify their design choices. However, I believe the paper will benefit from  more experiments, particularly on the instance segmentation and  completion parts.
+\end{tcolorbox}
+
+\response{Thanks for your positive comments.}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{tcolorbox}[title = {Comment \#2}, fonttitle = \bfseries]
+    Regarding the instance segmentation, I understand that this is not the main contribution of the paper. Still, it would be nice to test different approaches here to evaluate the robustness of the completion network to varying levels of wrong predictions. Along a similar line, I would have liked to see the completion network working on ground truth segmentation labels as this will disentangle errors coming from the instance segmentation net and the completion net.
 \end{tcolorbox}
 
 \response{We have modified it in Sec. \uppercase\expandafter{\romannumeral1}, and highlighted it in yellow.}
 
-\manuscript{
-    Visual SLAM algorithms have been widely investigated
-    by researchers in recent years \DIFdelbegin \DIFdel{[?], [1]-[3]}\DIFdelend \DIFaddbegin [1-4]. 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{tcolorbox}[title = {Comment \#3}, fonttitle = \bfseries]
+    Regarding the completion net, I would have  liked to see ablation studies here as I believe this is the main  contribution of this work. For example, how does the number of cuts  influence the results of the completion metrics? How does the number of  output points in the centroid-based contour influence the snowflake net?
+\end{tcolorbox}
+
+\response{
+    ...
 }
 
-\begin{tcolorbox}[title = {The Reviewer's Comment \#2},
-    fonttitle = \bfseries]
-    XXXXX Xxxxxxx XXxxxx xxxx
+\manuscript{
+    ...
+}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{tcolorbox}[title = {Comment \#1}, fonttitle = \bfseries]
+    Finally, is there a reason why the approach of Blok et al. 2025 is not being used as a  baseline? I would have liked to see a non-learning-based baseline as  well, like Marangoz et al. 2022
 \end{tcolorbox}
 
-\response{Xxxxx xxxxx xxxxxxxxx xxx xxxxxxxxxxxxx xxxx xxxxxxxxxxx xxx.}
+\response{
+    ...
+}
 
-\manuscript{  
-    \begin{equation}
-            \begin{aligned}
-                    \frac{\partial \mathbb{G}}{\partial \mathbf{E}} &= \sum_{i\in[0,N]} \frac{\partial \hat{\mathbf{g}}_{i}}{\partial \mathbf{E}} \\
-                \frac{\partial \hat{\mathbf{g}}_{i}}{\partial \mathbf{E}} = 2[\nabla I(x_i&,y_i)]^T \nabla[\frac{1}{g^{'}\left(I(x_i,y_i)\right)\mathbf{E}}]
-            \end{aligned}, \tag{2}
-\end{equation}}
- 
+\manuscript{
+    ...
+}
+    
+\section{Reviewer \#2}
 
-\begin{tcolorbox}[title = {The Reviewer's Comment \#2},
-    fonttitle = \bfseries]
-    XXXXX Xxxxxxx XXxxxx xxxx
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{tcolorbox}[title = {Comment \#1}, fonttitle = \bfseries]
+    Line 159: What does "instance-level" mean? Which platform, software, or tool was used for labeling?
 \end{tcolorbox}
 
-\response{Xxxxx xxxxx xxxxxxxxx xxx xxxxxxxxxxxxx xxxx xxxxxxxxxxx xxx.}
+\response{
+    ...
+}
 
-\begin{figure}[htbp]
-	\centering
-	\includegraphics[width=0.8\linewidth]{figures/Figure1.pdf}
-	\caption{Revision of Fig. 7 in the manuscript}
-\end{figure}
+\manuscript{
+    ...
+}
 
-\begin{tcolorbox}[title = {The Reviewer's Comment \#3},
-    fonttitle = \bfseries]
-    XXXXX Xxxxxxx XXxxxx xxxx
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{tcolorbox}[title = {Comment \#2}, fonttitle = \bfseries]
+    Line 179: What is meant by "selection area"?
 \end{tcolorbox}
 
-\response{Xxxxx xxxxx xxxxxxxxx xxx xxxxxxxxxxxxx xxxx xxxxxxxxxxx xxx.}
+\response{
+    ...
+}
 
-    \begin{table}[h]
-        \centering
-        \small
-        \caption{\textbf{Camera parameters}, Table 1 in the manuscript}
-        \label{cc}
-        \setlength{\tabcolsep}{3mm}{
-        \begin{tabular}{c<{\centering}c<{\centering}c<{\centering}c<{\centering}c<{\centering}}
-        \toprule[1pt]
-        \textbf{Camera Model}
-        & \textbf{CMOS} & \textbf{Image size}& \textbf{Shutter}\\
-        \midrule[0.5pt]
-        DAHENG MER-502-79U3C&IMX250&2448x2048&global\\
-        \bottomrule[1pt]
-        \end{tabular}}
-    \end{table}
+\manuscript{
+    ...
+}
 
-\bibliography{references} % 创建一个空的.bib文件或使用不存在的文件名
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{tcolorbox}[title = {Comment \#3}, fonttitle = \bfseries]
+    Table 3 results: Was the same dataset used to assess the other algorithms, or were those metrics taken from their original studies?
+\end{tcolorbox}
+
+\response{
+    ...
+}
+
+\manuscript{
+    ...
+}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{tcolorbox}[title = {Comment \#4}, fonttitle = \bfseries]
+    Occlusion  threshold: Is there a berry-occlusion threshold? For example, if less  than 50\% of a berry is visible, is it included? How are barely visible  berries handled?
+\end{tcolorbox}
+
+\response{
+    ...
+}
+
+\manuscript{
+    ...
+}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{tcolorbox}[title = {Comment \#5}, fonttitle = \bfseries]
+    Limitations \& future directions: How will the  model perform on wine grapes. Wine grapes accounts for ~60\% of US grape  production; clusters are denser, and berries are smaller than in table grapes.
+\end{tcolorbox}
+
+\response{
+    ...
+}
+
+\manuscript{
+    ...
+}
+
+
+
+\phantom{\cite{}} % 添加一个不可见的伪引用, 不会显示但能满足BibTeX要求避免无引用时报错
+\bibliographystyle{elsarticle-harv}
+\renewcommand{\bibsection}{} % 隐藏reference标题，如果需要则注释掉这一行
+\bibliography{references}
 
 \end{document}
+
+% The copy-paste templates
+\begin{verbatim}
+
+    %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+    \begin{tcolorbox}[title = {Comment \#1}, fonttitle = \bfseries]
+        ...
+    \end{tcolorbox}
+    
+    \response{
+        ...
+    }
+    
+    \manuscript{
+        ...
+    }
+    
+\end{verbatim}

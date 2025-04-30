@@ -136,7 +136,7 @@ innerleftmargin=0.6em,innerrightmargin=0.6em]{quote}
 {Manuscript ID: \@doi}\\[1.4em]
 {\Large\bf \@title}\\[0.6em]
 {\@author}\\[0.6em]
-{Corresponding Author: \@corresponding}\\[0.6em]
+{\@corresponding}\\[0.6em]
 {\@email}\\[1.6em]
 % \hrule
 % \hfill\small \textcolor[rgb]{0.357,0.608,0.835}{\(\quad\square\) Reviewers' Comment},\(\quad\square\) Authors' Response, \(\quad\square\) Manuscript Text \\[2em]
