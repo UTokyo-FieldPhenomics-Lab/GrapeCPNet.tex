@@ -71,21 +71,19 @@
 \textsuperscript{b} Graduate School of Agricultural and Life Sciences, The University of Tokyo, Tokyo, Japan\\
 % \textsuperscript{*} \\
 
-\textbf{\added{Highlights}}
-
-
-\begin{itemize}
-%   \item Novel deep learning pipeline for automated 3D grape phenotyping.
-%   \item GrapeCPNet: Self-supervised network for berry points cloud completion.
-%   \item High accuracy in berry instance segmentation (99.5\% average precision).
-%   \item Robust performance across four grape varieties ($R^2$ of 0.855 for radius, 0.969 for 
-% volume).
-%   \item Non-destructive and high-throughput analysis for viticulture applications.
-  \item \added{GrapeCPNet completes 3D point clouds for segmented berry instances.}
-  \item \added{GrapeCPNet is trained using self-supervision, free of manual annotations.}
-  \item \added{Integrated into a deep learning pipeline for automated 3D grape bunch phenotyping.}
-  \item \added{Achieved over 0.85 $R^2$ and 99.5\% average precision on four grape varieties.}
-\end{itemize}
+% \textbf{\added{Highlights}}
+% \begin{itemize}
+% %   \item Novel deep learning pipeline for automated 3D grape phenotyping.
+% %   \item GrapeCPNet: Self-supervised network for berry points cloud completion.
+% %   \item High accuracy in berry instance segmentation (99.5\% average precision).
+% %   \item Robust performance across four grape varieties ($R^2$ of 0.855 for radius, 0.969 for 
+% % volume).
+% %   \item Non-destructive and high-throughput analysis for viticulture applications.
+%   \item \added{GrapeCPNet completes 3D point clouds for segmented berry instances.}
+%   \item \added{GrapeCPNet is trained using self-supervision, free of manual annotations.}
+%   \item \added{Integrated into a deep learning pipeline for automated 3D grape bunch phenotyping.}
+%   \item \added{Achieved over 0.85 $R^2$ and 99.5\% average precision on four grape varieties.}
+% \end{itemize}
 
 \begin{abstract}
 The measurement of phenotypic parameters of fresh grapes, especially at the individual berry level, is critical for yield estimation and quality control. 
@@ -132,7 +130,7 @@ The aggregated cluster growth causes the berries to squeezed against each other,
 Therefore, point cloud instance segmentation can only capture partial information rather than that of whole berries.
 To address \replaced{this issue}{the issue of partial point clouds,} and consequently an underestimation of the berry traits, point cloud shape completion is one of the most commonly used solutions.
 Point cloud completion is the task of generating a complete 3D shape given partial point cloud input \citep{tesema_point_2024}. 
-For instance, \citet{ge_symmetrybased_2020} assume that strawberries are symmetrical, suggesting that their shape can be completed by mirroring the existing shape, provided an appropriate symmetrical plane can be identified.
+For instance, \citet{ge_symmetrybased_2020} assume that strawberries are symmetrical, suggesting that their shape can be completed by , provided an appropriate symmetrical plane can be identified.
 \citet{marangoz_fruit_2022} proposed an super-ellipsoids matching approach to map fruits on plants and estimate their shape.
 However, these methods are limited to specific fruit characteristics and require manual design of algorithms according to the features of the fruit, lacking the potential for generalized application.
 Utilizing deep learning methods, researchers have designed point cloud completion networks \citep{wang_unsupervised_2021}. 
