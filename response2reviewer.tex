@@ -1,0 +1,126 @@
+\documentclass{ar2rc}
+\usepackage{multicol}
+\usepackage{tcolorbox}
+\usepackage{booktabs}
+\usepackage{array}
+\usepackage{geometry}
+
+% 添加空的参考文献数据库和样式
+\usepackage{natbib}
+\bibliographystyle{plainnat} % 或其他适合的参考文献样式
+
+\rfoot{Page \thepage}
+\lettertitle{The Response to Reviewers for Minor Revision}
+\title{Xxxxxx Xxxxxxx Xxxxx Xxx Xxxxxx Xxxxx xxx Xxxxx Xxxx Xxxxxx}
+\author{Xxx Xxx, Member, IEEE, Xxxxx Xxx, Xxx Xxxx, Xxxx xxx, Xxxx xxxxx, Senior Member, IEEE, Xxxxx
+Xxxx}
+\journal{IEEE/ASME TRANSACTIONS ON XXXXXXX}
+\doi{XXXXX-XX-2022-XXXX}
+\corresponding{Xxxxxx Xxxxx}
+\email{XXXXX@xxx.edu.cn}
+
+\begin{document}
+
+\begin{center}
+    \maketitle
+\end{center}
+
+\BT{To Senior Editor, Technical Editor and Reviewers}
+
+\BL{Thank you for giving us the opportunity to submit a revised draft of the manuscript "Xxxxxx Xxxxxxxx Xxxxxx xxx xxxxx Xxxxxx xxxx Xxxxx Xxxx Xxxxxx" for publication in the Journal of IEEE/ASME TRANSACTIONS ON XXXXXXXX. We appreciate the time and effort that editors and the reviewers dedicated to providing feedback on our manuscript and are grateful for the insightful comments and valuable improvements to our paper. We have incorporated most of the suggestions made by the reviewers. Those changes are highlighted within the manuscript. Please see below, for a point-by-point response to the reviewers' comments and concerns. All page numbers refer to the revised manuscript file with tracked changes.}
+
+\section{Senior Editor Comments}
+
+% commet 
+\begin{tcolorbox}[title = {Senior Editor Comments},
+    fonttitle = \bfseries]
+    The three (3) reviewers that have examined the work and the Technical Editor (TE) appreciate the contribution of the paper but have also identified a number of issues that need to be resolved before the paper is ready for acceptance.
+    Those are very well presented in the reviewer report and outlined in the TE's recommendation. I recommend “Publish: Minor Revision” recommending the authors to address all raised issues, if/when they resubmit their work.
+\end{tcolorbox}
+
+% 感谢您对我们工作的认同和建议。如下文所示，我们已经对审稿人所提出的问题逐点进行了修改。
+
+\response{Thank you for your approval of our work and suggestions. As shown below, we have revised the issues raised by the reviewers point by point \cite{wang_3d_2022}}
+
+\section{Technical Editor Comments}
+
+% commet 
+\begin{tcolorbox}[title = {Technical Editor Comments},
+    fonttitle = \bfseries]
+Xxxxxx xxxxx xxxxxx xxxxx Xxxxxx xxxxxxxx xxxxxxxx xxxxxxxx xxxxxxx xxxxxxx xx xxx xxx.
+\end{tcolorbox}
+
+% 感谢您对我们工作的认可，并对审稿人的意见进行了有效的汇总。所有的意见和建议对我们来说都是重要且宝贵的，我们针对这些意见进行了详细而认真的修订。首先对手稿中描述的实验细节以及实现原理上，进行了更加深入的阐述，然后针对一些细节问题进行了必要的修正。
+
+\response{Xxxxx xxxx xxxxxx xxxxxxxxxxx xxx xxxxxxxx xxxxxxxxxx xxxx xxxxxxxx xx.}
+
+\section{Reviewer \#1}
+
+% commet 
+\begin{tcolorbox}[title = {The Reviewer's Comment \#1},
+    fonttitle = \bfseries]
+The first reference in Introduction must be checked [?].
+\end{tcolorbox}
+
+\response{We have modified it in Sec. \uppercase\expandafter{\romannumeral1}, and highlighted it in yellow.}
+
+\manuscript{
+    Visual SLAM algorithms have been widely investigated
+    by researchers in recent years \DIFdelbegin \DIFdel{[?], [1]-[3]}\DIFdelend \DIFaddbegin [1-4]. 
+}
+
+\begin{tcolorbox}[title = {The Reviewer's Comment \#2},
+    fonttitle = \bfseries]
+    XXXXX Xxxxxxx XXxxxx xxxx
+\end{tcolorbox}
+
+\response{Xxxxx xxxxx xxxxxxxxx xxx xxxxxxxxxxxxx xxxx xxxxxxxxxxx xxx.}
+
+\manuscript{  
+    \begin{equation}
+            \begin{aligned}
+                    \frac{\partial \mathbb{G}}{\partial \mathbf{E}} &= \sum_{i\in[0,N]} \frac{\partial \hat{\mathbf{g}}_{i}}{\partial \mathbf{E}} \\
+                \frac{\partial \hat{\mathbf{g}}_{i}}{\partial \mathbf{E}} = 2[\nabla I(x_i&,y_i)]^T \nabla[\frac{1}{g^{'}\left(I(x_i,y_i)\right)\mathbf{E}}]
+            \end{aligned}, \tag{2}
+\end{equation}}
+ 
+
+\begin{tcolorbox}[title = {The Reviewer's Comment \#2},
+    fonttitle = \bfseries]
+    XXXXX Xxxxxxx XXxxxx xxxx
+\end{tcolorbox}
+
+\response{Xxxxx xxxxx xxxxxxxxx xxx xxxxxxxxxxxxx xxxx xxxxxxxxxxx xxx.}
+
+\begin{figure}[htbp]
+	\centering
+	\includegraphics[width=0.8\linewidth]{figures/Figure1.pdf}
+	\caption{Revision of Fig. 7 in the manuscript}
+\end{figure}
+
+\begin{tcolorbox}[title = {The Reviewer's Comment \#3},
+    fonttitle = \bfseries]
+    XXXXX Xxxxxxx XXxxxx xxxx
+\end{tcolorbox}
+
+\response{Xxxxx xxxxx xxxxxxxxx xxx xxxxxxxxxxxxx xxxx xxxxxxxxxxx xxx.}
+
+    \begin{table}[h]
+        \centering
+        \small
+        \caption{\textbf{Camera parameters}, Table 1 in the manuscript}
+        \label{cc}
+        \setlength{\tabcolsep}{3mm}{
+        \begin{tabular}{c<{\centering}c<{\centering}c<{\centering}c<{\centering}c<{\centering}}
+        \toprule[1pt]
+        \textbf{Camera Model}
+        & \textbf{CMOS} & \textbf{Image size}& \textbf{Shutter}\\
+        \midrule[0.5pt]
+        DAHENG MER-502-79U3C&IMX250&2448x2048&global\\
+        \bottomrule[1pt]
+        \end{tabular}}
+    \end{table}
+
+\bibliography{references} % 创建一个空的.bib文件或使用不存在的文件名
+
+\end{document}
