@@ -107,7 +107,7 @@ The aggregated cluster growth causes the berries to squeezed against each other,
 Therefore, point cloud instance segmentation can only capture partial information rather than that of whole berries.
 To address this issue and consequently an underestimation of the berry traits, point cloud shape completion is one of the most commonly used solutions.
 Point cloud completion is the task of generating a complete 3D shape given partial point cloud input \citep{tesema_point_2024}. 
-For instance, \citet{ge_symmetrybased_2020} assume that strawberries are symmetrical, suggesting that their shape can be completed by , provided an appropriate symmetrical plane can be identified.
+For instance, \citet{ge_symmetrybased_2020} assume that strawberries are symmetrical, suggesting that their shape can be completed by mirroring the existing shape, provided an appropriate symmetrical plane can be identified.
 \citet{marangoz_fruit_2022} proposed an super-ellipsoids matching approach to map fruits on plants and estimate their shape.
 However, these methods are limited to specific fruit characteristics and require manual design of algorithms according to the features of the fruit, lacking the potential for generalized application.
 Utilizing deep learning methods, researchers have designed point cloud completion networks \citep{wang_unsupervised_2021}. 

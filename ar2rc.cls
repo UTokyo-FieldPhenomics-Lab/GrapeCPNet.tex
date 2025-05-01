@@ -61,6 +61,28 @@ innerleftmargin=0.6em,innerrightmargin=0.6em]{quote}
 \let\endoldtabular=\endtabular
 \renewenvironment{tabular}[1]{\begin{adjustbox}{center}\begin{oldtabular}{#1}}{\end{oldtabular}\end{adjustbox}}
 
+% Reviewer comment counter
+\RequirePackage{tcolorbox}
+\newcounter{reviewercomment}
+\setcounter{reviewercomment}{0}
+% 定义审稿意见环境
+\newenvironment{reviewercomment}[1][]{%
+    \refstepcounter{reviewercomment}%
+    \begin{tcolorbox}[
+        title = {Comment \#\thereviewercomment},
+        fonttitle = \bfseries,
+        #1
+    ]
+}{%
+    \end{tcolorbox}%
+}
+% 在每个 \section 后自动重置评论计数器
+\let\oldsection\section
+\renewcommand{\section}[1]{%
+    \oldsection{#1}%
+    \setcounter{reviewercomment}{0}%
+}
+
 % Shortcuts
 %% Let textbf be both, bold and italic
 %\DeclareTextFontCommand{\textbf}{\bfseries\em}

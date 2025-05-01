@@ -42,25 +42,26 @@
 \BL{Thank you for giving us the opportunity to submit a revised draft of the manuscript ``\papertitle'' for publication in the Journal of \journalname. We appreciate the time and effort that editors and the reviewers dedicated to providing feedback on our manuscript and are grateful for the insightful comments and valuable improvements to our paper. We have incorporated most of the suggestions made by the reviewers. Those changes are highlighted within the manuscript. Please see below, for a point-by-point response to the reviewers' comments and concerns. All page numbers refer to the revised manuscript file with tracked changes.}
 
 \section{Reviewer \#1}
+\setcounter{reviewercomment}{0}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{tcolorbox}[title = {Comment \#1}, fonttitle = \bfseries]
+\begin{reviewercomment}
     Overall, the paper is well structured with a clear goal,  and the authors provide insight to justify their design choices. However, I believe the paper will benefit from  more experiments, particularly on the instance segmentation and  completion parts.
-\end{tcolorbox}
+\end{reviewercomment}
 
 \response{Thanks for your positive comments.}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{tcolorbox}[title = {Comment \#2}, fonttitle = \bfseries]
+\begin{reviewercomment}
     Regarding the instance segmentation, I understand that this is not the main contribution of the paper. Still, it would be nice to test different approaches here to evaluate the robustness of the completion network to varying levels of wrong predictions. Along a similar line, I would have liked to see the completion network working on ground truth segmentation labels as this will disentangle errors coming from the instance segmentation net and the completion net.
-\end{tcolorbox}
+\end{reviewercomment}
 
 \response{We have modified it in Sec. \uppercase\expandafter{\romannumeral1}, and highlighted it in yellow.}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{tcolorbox}[title = {Comment \#3}, fonttitle = \bfseries]
+\begin{reviewercomment}
     Regarding the completion net, I would have  liked to see ablation studies here as I believe this is the main  contribution of this work. For example, how does the number of cuts  influence the results of the completion metrics? How does the number of  output points in the centroid-based contour influence the snowflake net?
-\end{tcolorbox}
+\end{reviewercomment}
 
 \response{
     ...
@@ -71,10 +72,9 @@
 }
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{tcolorbox}[title = {Comment \#1}, fonttitle = \bfseries]
+\begin{reviewercomment}
     Finally, is there a reason why the approach of Blok et al. 2025 is not being used as a  baseline? I would have liked to see a non-learning-based baseline as  well, like Marangoz et al. 2022
-\end{tcolorbox}
-
+\end{reviewercomment}
 \response{
     ...
 }
@@ -86,9 +86,9 @@
 \section{Reviewer \#2}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{tcolorbox}[title = {Comment \#1}, fonttitle = \bfseries]
+\begin{reviewercomment}
     Line 159: What does "instance-level" mean? Which platform, software, or tool was used for labeling?
-\end{tcolorbox}
+\end{reviewercomment}
 
 \response{
     ...
@@ -99,9 +99,9 @@
 }
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{tcolorbox}[title = {Comment \#2}, fonttitle = \bfseries]
+\begin{reviewercomment}
     Line 179: What is meant by "selection area"?
-\end{tcolorbox}
+\end{reviewercomment}
 
 \response{
     ...
@@ -113,9 +113,9 @@
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{tcolorbox}[title = {Comment \#3}, fonttitle = \bfseries]
+\begin{reviewercomment}
     Table 3 results: Was the same dataset used to assess the other algorithms, or were those metrics taken from their original studies?
-\end{tcolorbox}
+\end{reviewercomment}
 
 \response{
     ...
@@ -127,9 +127,9 @@
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{tcolorbox}[title = {Comment \#4}, fonttitle = \bfseries]
+\begin{reviewercomment}
     Occlusion  threshold: Is there a berry-occlusion threshold? For example, if less  than 50\% of a berry is visible, is it included? How are barely visible  berries handled?
-\end{tcolorbox}
+\end{reviewercomment}
 
 \response{
     ...
@@ -141,9 +141,9 @@
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{tcolorbox}[title = {Comment \#5}, fonttitle = \bfseries]
+\begin{reviewercomment}
     Limitations \& future directions: How will the  model perform on wine grapes. Wine grapes accounts for ~60\% of US grape  production; clusters are denser, and berries are smaller than in table grapes.
-\end{tcolorbox}
+\end{reviewercomment}
 
 \response{
     ...
@@ -166,9 +166,9 @@
 \begin{verbatim}
 
     %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-    \begin{tcolorbox}[title = {Comment \#1}, fonttitle = \bfseries]
+    \begin{reviewercomment}
         ...
-    \end{tcolorbox}
+    \end{reviewercomment}
     
     \response{
         ...
