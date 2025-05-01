@@ -7,6 +7,10 @@
 
 \usepackage{natbib}
 
+\usepackage[draft,commandnameprefix=ifneeded]{changes}
+\definechangesauthor[color=red]{R1}
+\definechangesauthor[color=blue]{R2}
+
 \newcommand{\papertitle}{GrapeCPNet: A Self-supervised Point Cloud Completion Network for 3D Phenotyping of Grape Bunches}
 \newcommand{\journalname}{Computers and Electronics in Agriculture}
 
@@ -87,7 +91,20 @@
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{reviewercomment}
-    Line 159: What does "instance-level" mean? Which platform, software, or tool was used for labeling?
+    Line 159: What does "instance-level" mean?
+\end{reviewercomment}
+
+\response{
+    We appreciate the reviewer's comment. The term "instance-level" refers to the individual segmentation of each grape berry and stem in the point cloud, where each instance is distinctly labeled and separated from others. We have clarified this definition in the revised manuscript.
+}
+
+\manuscript{
+    In order to train and validate SoftGroup, each berry and stem in the bunch point cloud obtained in Section~\ref{sec:212} was \added[id=R2]{individually} labeled \replaced[id=R2]{(instance-level segmentation) as shown in}{at the instance-level} 
+}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{reviewercomment}
+    Which platform, software, or tool was used for labeling?
 \end{reviewercomment}
 
 \response{

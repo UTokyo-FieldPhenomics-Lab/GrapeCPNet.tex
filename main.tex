@@ -13,6 +13,8 @@
 
 % final or draft
 \usepackage[draft]{changes}
+\definechangesauthor[color=red]{R1}
+\definechangesauthor[color=blue]{R2}
 
 \usepackage{cite}
 \usepackage[ruled]{algorithm2e}
@@ -253,7 +255,7 @@ SoftGroup used a two step approach:
 (2) a threshold score was used to judge the boundary of the point to avoid point category misclassification. 
 Therefore, it is suitable for use in a bunch where there is a tight connection between the berries.
 
-In order to train and validate SoftGroup, each berry and stem in the bunch point cloud obtained in Section~\ref{sec:212} was labeled at the instance-level (Fig.~\ref{fig:raw11}). 
+In order to train and validate SoftGroup, each berry and stem in the bunch point cloud obtained in Section~\ref{sec:212} was \added[id=R2]{individually} labeled \replaced[id=R2]{(instance-level segmentation) as shown in}{at the instance-level} Fig.~\ref{fig:raw11}. 
 This paper collected and labeled eight bunches for each of the four species (in total 32 bunches). 
 Five grape bunches per grape specie (in total 20) were randomly selected and used as training samples. The remaining three bunches were used for validation.
 

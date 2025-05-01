@@ -111,7 +111,7 @@ innerleftmargin=0.6em,innerrightmargin=0.6em]{quote}
 \WithSuffix\long\def\response*#1\par{#1\par} %\response
 
 
-\long\def\manuscript#1\par{\makebox[0pt][r]{\hspace{10pt}}\color[rgb]{0.27,0.45,0.77}{}\\[5pt]{{"$\cdots$ #1 $\cdots$"}}\\[12pt]\color{black}} %\manuscript
+\long\def\manuscript#1\par{\makebox[0pt][r]{\hspace{10pt}}\color[rgb]{0.5,0.5,0.5}{}\\[5pt]{{"$\cdots$ #1 $\cdots$"}}\\[12pt]\color{black}} %\manuscript
 \WithSuffix\long\def\manuscript*#1\par{#1\par} %\manuscript
 
 % \long\def\manuscript#1\par{\makebox[0pt][r]{\hspace{10pt}}\\[3pt]\large\color[rgb]{0,1,0}{"#1"}\\[3pt]} %\manuscript
