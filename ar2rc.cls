@@ -76,11 +76,46 @@ innerleftmargin=0.6em,innerrightmargin=0.6em]{quote}
 }{%
     \end{tcolorbox}%
 }
-% 在每个 \section 后自动重置评论计数器
-\let\oldsection\section
-\renewcommand{\section}[1]{%
-    \oldsection{#1}%
-    \setcounter{reviewercomment}{0}%
+
+% 定义todo命令
+\newcommand{\todoblock}[1]{%
+  \begin{tcolorbox}[
+    colframe=green,
+    colback=green!10!white,
+    colbacktitle=green!40!white,
+    coltitle=black, 
+    fonttitle=\bfseries,
+    title=TODO
+  ]
+  #1
+  \end{tcolorbox}%
+}
+
+%%% Counters
+\newcounter{reviewer}
+\setcounter{reviewer}{0}
+\newcounter{revcomment}[reviewer]
+\setcounter{revcomment}{0}
+%%%
+
+%%% Commands
+\newcommand*{\editor}{
+	\clearpage
+	\@ifundefined{pdfbookmark}{}{%
+		\pdfbookmark[1]{Reponse to the Editor}{hyperref@editor}%
+	}%
+	\section*{Authors' Response to the Editor}
+}
+
+\newcommand*{\reviewer}{
+	\clearpage
+	\refstepcounter{reviewer}%
+	\@ifundefined{pdfbookmark}{}{%
+		\pdfbookmark[1]{Reviewer \arabic{reviewer}}{hyperref@reviewer\arabic{reviewer}}%
+	}%
+	\section*{Authors' Response to Reviewer~\arabic{reviewer}}
+    % 在每个 \section 后自动重置评论计数器
+    \setcounter{reviewercomment}{0}
 }
 
 % Shortcuts

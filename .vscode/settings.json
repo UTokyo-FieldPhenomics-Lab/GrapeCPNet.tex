@@ -123,9 +123,9 @@
         "code.cmd -r -g \"%f:%l\"",
         "%PDF%"
     ],
-    "latex-workshop.latex.autoClean.run": "onBuilt",
+    // "latex-workshop.latex.autoClean.run": "onBuilt",
     "latex-workshop.latex.clean.fileTypes": [
-        "*.aux",
+        // "*.aux",
         "*.bbl",
         "*.blg",
         "*.idx",
