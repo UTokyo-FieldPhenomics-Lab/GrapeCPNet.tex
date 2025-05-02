@@ -88,9 +88,10 @@ Email: guowei@g.ecc.u-tokyo.ac.jp
     In this revision, we have:
 
     1. Carefully addressed all reviewer comments point-by-point;\\
-    2. Provided detailed responses explaining each modification;\\
-    3. Made all necessary revisions to improve manuscript clarity and technical accuracy;\\
-    4. Included tracked changes in the revised manuscript for transparent review.
+    2. ...
+    % 2. Provided detailed responses explaining each modification;\\
+    % 3. Made all necessary revisions to improve manuscript clarity and technical accuracy;\\
+    % 4. Included tracked changes in the revised manuscript for transparent review.
 
     We believe these revisions have significantly strengthened the paper, and we appreciate the editor's and reviewers' time and constructive suggestions. 
     Please find our point-by-point responses to each reviewer comment in the following sections.
@@ -111,6 +112,8 @@ Email: guowei@g.ecc.u-tokyo.ac.jp
     Regarding the suggestion for additional experiments, we agree that further validation would strengthen the work. 
 
     In response, we have:
+
+    ...
 }
 
 \todoblock{
@@ -122,15 +125,68 @@ Email: guowei@g.ecc.u-tokyo.ac.jp
     Regarding the instance segmentation, I understand that this is not the main contribution of the paper. Still, it would be nice to test different approaches here to evaluate the robustness of the completion network to varying levels of wrong predictions. Along a similar line, I would have liked to see the completion network working on ground truth segmentation labels as this will disentangle errors coming from the instance segmentation net and the completion net.
 \end{reviewercomment}
 
-\response{We have modified it in Sec. \uppercase\expandafter{\romannumeral1}, and highlighted it in yellow.}
+\response{
+    We sincerely appreciate the reviewer's valuable suggestions regarding the instance segmentation evaluation. 
+    In response, we have conducted additional comparative experiments by applying our completion network to both manually annotated ground truth labels and SoftGroup segmentation results, with quantitative comparisons shown in the new results figure and table below.
+
+    
+    A t-test analysis revealed no statistically significant differences between the two approaches (p > xxx), demonstrating that our high-accuracy segmentation network (achieving mAP@[.5:.95] of 0.995 represents an AP50 of 0.999 for our results) provides sufficiently reliable inputs for the completion network. 
+
+    We maintain our design of having specialized networks focus on their respective tasks: the segmentation network achieves reliable segmentation accuracy, while the completion network specializes in partial point cloud completion. 
+    Rather than increasing the completion network's robustness to handle poor segmentation results.
+    It would require generating artificial training data with various error patterns that might negatively impact training.
+    We believe it is more principled to improve the segmentation performance directly. 
+    This modular approach ensures clear responsibility separation between network components.
+}
+
+\todoblock{
+    Execute the following experiment on manual annotation bunches:
+
+    1. Apply completion networks directly on ground truth (separated 3D reconstruction)
+
+    2. Run SoftGroup segmentation on ground truth, and then apply completion networks on these results
+
+    3. Compare two results to draw comparison tables and runing t-test to show no significant differences.
+}
+
+\manuscript{
+    ...
+}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{reviewercomment}
-    Regarding the completion net, I would have  liked to see ablation studies here as I believe this is the main  contribution of this work. For example, how does the number of cuts  influence the results of the completion metrics? How does the number of  output points in the centroid-based contour influence the snowflake net?
+    Regarding the completion net, I would have liked to see ablation studies here as I believe this is the main  contribution of this work. For example, how does the number of cuts  influence the results of the completion metrics? How does the number of  output points in the centroid-based contour influence the snowflake net?
 \end{reviewercomment}
 
 \response{
+    We thank the reviewer for these insightful suggestions regarding ablation studies for our completion network. 
+    For current manuscript, we already have part ablation studies. 
+    The GrapeCPNet is combined the modification of PoinTr and SnowFlakeNet.
+    As shown in the original Table 3, we compared the performance of:
+    (1) Standalone PoinTr; (2) Standalone SnowFlakeNet; (3) Our modified GrapeCPNet (combined architecture).
+    The results demonstrated the superiority of our integrated approach.
+
+    We have also expanded our ablation studies to provide more comprehensive analysis as you suggested:
+
+    1. \textbf{Impact of Cut Numbers}: We conducted new experiments evaluating how different occlusion levels (number of cuts) affect completion performance:
+
     ...
+
+    The results showed that mixed occlusion training significantly improves generalization
+
+    2. \textbf{Point Number Analysis}: We investigated how output point count affects SnowFlakeNet performance:
+
+    ...
+
+    The result showed higher point counts yield better completion quality.
+}
+
+\todoblock{
+    To add the experiement:
+
+    1. split training data to 1 cuts, 2cuts, 3cuts, 4 cuts and 5 cuts, train 5 individual networks and validate on val dataset and compare with 1-5 full training data? (expected -> less cuts in training data, worse performance on server overlapped.)
+    
+    2. Decrease the feature M (current=2048) of networks, 2048, 1024, 512, 256, to see if any affects of completion results.
 }
 
 \manuscript{
@@ -141,8 +197,27 @@ Email: guowei@g.ecc.u-tokyo.ac.jp
 \begin{reviewercomment}
     Finally, is there a reason why the approach of Blok et al. 2025 is not being used as a  baseline? I would have liked to see a non-learning-based baseline as  well, like Marangoz et al. 2022
 \end{reviewercomment}
+
 \response{
-    ...
+    We appreciate the reviewer's suggestion regarding additional baselines. 
+
+    The work of \citet{marangoz_fruit_2022} generates cube-like point clouds for peppers, which may not be suitable for our sphere-like grape berries.
+    Additionally, re-implementation their algorithm is time-consuming and unlikely to benefit our current grape project.
+    Our ellipsoid surface fitting is a similar non-learning-based approach, serving for berry traits analysis in this study. 
+    Therefore, it may not be appropriate as a baseline comparison.
+
+    The comparison with \citet{blok_highthroughput_2025} was not included initially because these were independent parallel research projects during our manuscript preparation phase. 
+    Following editorial recommendations during the submission process, we subsequently added discussions of comparable works in the revised manuscript, including it into the discussion part after its acceptance.
+
+    In this revision, we have now included CoRe++ from \citet{blok_highthroughput_2025} performance on our grape dataset in Table 3. 
+    However, we observe that the network architectures target substantially different objectives.
+    Our grape dataset involves partial completion from the same sensor type, while the potato network focuses on fusing different sensors 
+    (with incomplete point clouds from RGB-D and complete ones from SfM, exhibiting significant shape and texture differences). 
+    Our approach emphasizes better completion performance while the \citet{blok_highthroughput_2025} more on processing speed and real-time processing, and consequently, CoRe++ does not demonstrate significant advantages in our grape dataset scenario.
+}
+
+\todoblock{
+    Add CoRe++ results to Table 3 (collaboration with pieter)
 }
 
 \manuscript{
@@ -178,7 +253,7 @@ Email: guowei@g.ecc.u-tokyo.ac.jp
 }
 
 \todoblock{
-    Confirm which tool for labeling
+    Confirm which tool for labeling, or SoftGroup can automatically annotation?
 }
 
 \manuscript{
