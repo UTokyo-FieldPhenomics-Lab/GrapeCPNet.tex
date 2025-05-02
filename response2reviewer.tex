@@ -74,10 +74,27 @@ Email: guowei@g.ecc.u-tokyo.ac.jp
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{reviewercomment}
-    Overall, the paper is well structured with a clear goal,  and the authors provide insight to justify their design choices. However, I believe the paper will benefit from  more experiments, particularly on the instance segmentation and  completion parts.
+    Thank you for submitting your manuscript to Computers and Electronics in Agriculture. 
+    I have received comments from reviewers on your manuscript. 
+    Your paper should become acceptable for publication pending suitable moderate revision and modification of the article in light of the appended reviewer comments.
+
+    When resubmitting your manuscript, please carefully consider all issues mentioned in the reviewers' comments, outline every change made point by point, and provide suitable rebuttals for any comments not addressed.
 \end{reviewercomment}
 
-\response{Thanks for your positive comments.}
+\response{
+    We sincerely appreciate the positive feedback from the editor and reviewers regarding our manuscript. 
+    We are grateful for the opportunity to revise our work based on the valuable comments received. 
+
+    In this revision, we have:
+
+    1. Carefully addressed all reviewer comments point-by-point;\\
+    2. Provided detailed responses explaining each modification;\\
+    3. Made all necessary revisions to improve manuscript clarity and technical accuracy;\\
+    4. Included tracked changes in the revised manuscript for transparent review.
+
+    We believe these revisions have significantly strengthened the paper, and we appreciate the editor's and reviewers' time and constructive suggestions. 
+    Please find our point-by-point responses to each reviewer comment in the following sections.
+}
 
 %============
 % Reviewer 1
@@ -85,10 +102,20 @@ Email: guowei@g.ecc.u-tokyo.ac.jp
 \reviewer
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{reviewercomment}
-    Overall, the paper is well structured with a clear goal,  and the authors provide insight to justify their design choices. However, I believe the paper will benefit from  more experiments, particularly on the instance segmentation and  completion parts.
+    Overall, the paper is well structured with a clear goal, and the authors provide insight to justify their design choices. 
+    However, I believe the paper will benefit from  more experiments, particularly on the instance segmentation and completion parts.
 \end{reviewercomment}
 
-\response{Thanks for your positive comments.}
+\response{
+    We sincerely appreciate the reviewer's positive assessment of our study and manuscript. 
+    Regarding the suggestion for additional experiments, we agree that further validation would strengthen the work. 
+
+    In response, we have:
+}
+
+\todoblock{
+    Summary of added experiment.
+}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{reviewercomment}
@@ -146,11 +173,12 @@ Email: guowei@g.ecc.u-tokyo.ac.jp
 \end{reviewercomment}
 
 \response{
-    ...
+    We thank the reviewer for raising this important methodological detail. 
+    The 3D point clouds were labeled using CloudCompare (v2.12.4), an open-source software for 3D point cloud and mesh processing.
 }
 
 \todoblock{
-    Confirm with Guoqiang which tool for labeling
+    Confirm which tool for labeling
 }
 
 \manuscript{
@@ -226,25 +254,39 @@ Email: guowei@g.ecc.u-tokyo.ac.jp
 \end{reviewercomment}
 
 \response{
-    ...
+    We appreciate the reviewer's attention to experimental rigor. 
+    To ensure fair comparison, all the comparing methods were conducted on our grape dataset under the same conditions.
+    We have added this clarification to the results part.
 }
 
 \manuscript{
-    ...
+    GrapeCPNet achieves the best results under the self-supervised training method in both the training phase and the application phase, better than the comparative algorithms \added[id=R2]{under the same condition of our grape dataset}. 
 }
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{reviewercomment}
-    Occlusion  threshold: Is there a berry-occlusion threshold? For example, if less  than 50\% of a berry is visible, is it included? How are barely visible  berries handled?
+    Occlusion threshold: Is there a berry-occlusion threshold? 
+    For example, if less than 50\% of a berry is visible, is it included? How are barely visible berries handled?
 \end{reviewercomment}
 
 \response{
-    ...
+    We thank the reviewer for this insightful question regarding occlusion handling. 
+    Our approach was designed specifically to address challenging occlusion scenarios.
+
+    We intentionally avoided setting visibility thresholds (e.g., 50\% cutoff) to maintain the applicable of proposed method.
+    As shown in Fig.~\ref{fig:raw12}b, after removing 4 sphere regions, the incomplete berry for network training can achieved nearly around 75\% occlusion. 
+    Thus, the GrapeCPNet is able to learn serever occlusions for barely visible berries.
+
+    However, we must also admit that when severely obscured, only partial information can be seen. 
+    The more obscured it is, the less information it provides. 
+    Therefore, errors inevitably increase when the berry is not in a regular shape.
+    As stated in the discussion part, we planed to taking prior knowledge of berry geometry to further improve the quality of completion.
 }
 
 \manuscript{
-    ...
+    We found that GrapeCPNet performed a little bit worse in the case of strange berry shapes, such as drop-shaped \added[id=R2]{berries, particularly when berries were sereverly occluded}.
+    We subsequently consider utilizing the prior knowledge of berry geometry to achieve more detailed morphological feature extraction and representation to improve the quality of completion. 
 }
 
 
@@ -254,18 +296,37 @@ Email: guowei@g.ecc.u-tokyo.ac.jp
 \end{reviewercomment}
 
 \response{
-    ...
+    We appreciate the reviewer's insightful comment regarding wine grapes, which indeed represent a major segment of grape production. 
+    In our current study, we just focused on table grape varieties commonly found in Chinese markets.
+    Although they covered a wide range of cluster densities (from sparse to very dense) and berry sizes (20-35 cm axis length, as shown in Table~\ref{tbl:1} and Figure~\ref{fig:raw17}), 
+    we acknowledge that wine grapes typically have smaller berry sizes lower than 13-15 mm \citep{manso_wine_2021,melo_berry_2015}, these small sizes were not included in our dataset.
+
+    From a deep learning perspective, our model architecture should be capable of handling smaller wine grapes if provided with appropriate training data, as the fundamental detection principles remain similar regardless of grape variety. 
+    Nevertheless, we agree that future work should specifically address wine grape detection through collaboration with U.S. researchers to: 
+    (1) collect wine grape datasets, and 
+    (2) evaluate whether models trained on table grapes can generalize well to the smaller wine grape berries without additional training.
+
+    We have added the previous points to the discussion parts.
 }
 
 \manuscript{
-    ...
+    \added[id=R2]{
+        This study has another limitation: it focuses only on four table grapes, which are currently common and available in Chinese markets.
+        Although we examined a wide range of cluster densities (from sparse to very dense) and berry sizes (20-35 mm axis length, as shown in Table~\ref{tbl:1} and Figure~\ref{fig:raw17}),
+        the study did not include wine grapes, which account for over 60\% of U.S. grape production and typically have smaller berries and denser clusters.
+        As \citet{manso_wine_2021,melo_berry_2015} report, wine grape berries are often smaller than 13-15 mm, a size range not covered in our dataset.
+        From a deep learning perspective, our model architecture should be able to detect smaller wine grapes with appropriate training data, as the basic detection principles are similar across grape varieties.
+        Future work should involve collaboration with U.S. researchers to collect wine grape datasets and assess whether models trained on table grapes can generalize well to smaller wine grape berries without additional training.
+    }
+
+    \replaced[id=R2]{Additionally, this study only}{Another limitation of this study is that it} focused on a single berry bunch in a controlled environment.
 }
 
 
 
-\phantom{\cite{}} % 添加一个不可见的伪引用, 不会显示但能满足BibTeX要求避免无引用时报错
+% \phantom{\cite{}} % 添加一个不可见的伪引用, 不会显示但能满足BibTeX要求避免无引用时报错
 \bibliographystyle{elsarticle-harv}
-\renewcommand{\bibsection}{} % 隐藏reference标题，如果需要则注释掉这一行
+% \renewcommand{\bibsection}{} % 隐藏reference标题，如果需要则注释掉这一行
 \bibliography{references}
 
 \end{document}

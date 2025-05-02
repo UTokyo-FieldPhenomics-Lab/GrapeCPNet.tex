@@ -552,7 +552,8 @@ According that figure, we can also see an almost perfect instance berry segmenta
 The berry point cloud completion experiments are divided into two parts according to the different phases of the network: 
 the results of the self-supervised training (Test) and the results of the practical application (Inference).
 As shown in Table~\ref{tbl:4}, 
-GrapeCPNet achieves the best results under the self-supervised training method in both the training phase and the application phase, better than the comparative algorithms. Fig.~\ref{fig:raw14} visualizes the shape completion result of GrapeCPNet on the incomplete berry segmented from the bunch in the application phase.
+GrapeCPNet achieves the best results under the self-supervised training method in both the training phase and the application phase, better than the comparative algorithms \added[id=R2]{under the same condition of our grape dataset}. 
+Fig.~\ref{fig:raw14} visualizes the shape completion result of GrapeCPNet on the incomplete berry segmented from the bunch in the application phase.
 
 % table 4
 \begin{table}[h]
@@ -684,11 +685,20 @@ Thus, we simulated random sphere cutting on the complete berry point clouds to g
 As demonstrated in Subsection~\ref{sec:32}, these automatically generated paired training datasets were successfully used to train several completion models (Table~\ref{tbl:4}).
 We have found that some researchers \citep{pan_panoptic_2023,magistri_efficient_2024} have improved the completion effect by encoding a prior knowledge of the geometry of the object into the weights of the neural network. 
 Considering the agricultural plant completion task, our proposed GrapeCPNet, which combines centroid-based sparse completion with diffusion-based dense completion, outperformed other networks in terms of performance.
-We found that GrapeCPNet performed a little bit worse in the case of strange berry shapes, such as drop-shaped.
+We found that GrapeCPNet performed a little bit worse in the case of strange berry shapes, such as drop-shaped \added[id=R2]{berries, particularly when berries were sereverly occluded}.
 We subsequently consider utilizing the prior knowledge of berry geometry to achieve more detailed morphological feature extraction and representation to improve the quality of completion. 
 
 % challenges, limitations and future works.
-Another limitation of this study is that it focused on a single berry bunch in a controlled environment.
+\added[id=R2]{
+    This study has another limitation: it focuses only on four table grapes, which are currently common and available in Chinese markets.
+    Although we examined a wide range of cluster densities (from sparse to very dense) and berry sizes (20-35 mm axis length, as shown in Table~\ref{tbl:1} and Figure~\ref{fig:raw17}),
+    the study did not include wine grapes, which account for over 60\% of U.S. grape production and typically have smaller berries and denser clusters.
+    As \citet{manso_wine_2021,melo_berry_2015} report, wine grape berries are often smaller than 13-15 mm, a size range not covered in our dataset.
+    From a deep learning perspective, our model architecture should be able to detect smaller wine grapes with appropriate training data, as the basic detection principles are similar across grape varieties.
+    Future work should involve collaboration with U.S. researchers to collect wine grape datasets and assess whether models trained on table grapes can generalize well to smaller wine grape berries without additional training.
+}
+
+\replaced[id=R2]{Additionally, this study only}{Another limitation of this study is that it} focused on a single berry bunch in a controlled environment.
 The noise in the data is also related to the effectiveness of the method proposed in this paper.
 For practical applications in vineyards, collecting the same point cloud quality as that achieved in controlled indoor environments can be challenging, and multi-view data collection may not be as efficient.
 How to effectively implement the method in practical application scenarios is another issue to be considered in future research.
