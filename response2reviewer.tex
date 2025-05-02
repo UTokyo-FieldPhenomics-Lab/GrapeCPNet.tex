@@ -18,15 +18,10 @@
 \definechangesauthor[color=red]{R1}
 \definechangesauthor[color=blue]{R2}
 
-\newcommand{\papertitle}{GrapeCPNet: A Self-supervised Point Cloud Completion Network for 3D Phenotyping of Grape Bunches}
-\newcommand{\journalname}{Computers and Electronics in Agriculture}
-
 \rfoot{Page \thepage}
-\lettertitle{The Response to Reviewers}
-\journal{\journalname}
-\doi{COMPAG-D-25-00311R1}
 
-\title{\papertitle}
+\lettertitle{The Response to Reviewers}
+\title{GrapeCPNet: A Self-supervised Point Cloud Completion Network for 3D Phenotyping of Grape Bunches}
 \author{
     Wenli Zhang \textsuperscript{a,*},
     Chao Zheng \textsuperscript{a},
@@ -35,6 +30,8 @@
     Haozhou Wang \textsuperscript{b},
     Wei Guo \textsuperscript{b,*}
 }
+\journal{Computers and Electronics in Agriculture}
+\doi{COMPAG-D-25-00311R1}
 
 \corresponding{Corresponding author: zhangwenli@bjut.edu.cn; guowei@g.ecc.u-tokyo.ac.jp }
 \email{
@@ -48,15 +45,43 @@
     \maketitle
 \end{center}
 
-\BT{To Editor and Reviewers}
+%%%%%%%%%%%%%%%%
+% cover letter %
+%%%%%%%%%%%%%%%%
+\thedate
 
-\BL{Thank you for giving us the opportunity to submit a revised draft of the manuscript ``\papertitle'' for publication in the Journal of \journalname. We appreciate the time and effort that editors and the reviewers dedicated to providing feedback on our manuscript and are grateful for the insightful comments and valuable improvements to our paper. We have incorporated most of the suggestions made by the reviewers. Those changes are highlighted within the manuscript. Please see below, for a point-by-point response to the reviewers' comments and concerns. All page numbers refer to the revised manuscript file with tracked changes.}
+Dear Editor:
 
+Thank you for giving us the opportunity to submit a revised draft of the manuscript ``\thetitle'' for publication in the Journal of \thejournal. We appreciate the time and effort that editors and the reviewers dedicated to providing feedback on our manuscript and are grateful for the insightful comments and valuable improvements to our paper. We have incorporated most of the suggestions made by the reviewers. Those changes are highlighted within the manuscript. Please see below, for a point-by-point response to the reviewers' comments and concerns. All page numbers refer to the revised manuscript file with tracked changes.
+
+Thank your for your consideration. I am looking forward to hearing from you soon.
+
+Sincerely,
+
+Wei Guo\\
+Associate professor\\
+Graduate School of Agricultural and Life Science\\
+The University of Tokyo, Tokyo, Japan\\
+Email: guowei@g.ecc.u-tokyo.ac.jp
+
+\vfill
+\textbf{Note:} To enhance the legibility of this response letter, all the editor's and reviewers' comments are typeset in boxes. Rephrased or added sentences are typeset in color. The respective parts in the manuscript are highlighted to indicate changes.
+
+%====================
 % Response to Editor
+%====================
 \editor
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{reviewercomment}
+    Overall, the paper is well structured with a clear goal,  and the authors provide insight to justify their design choices. However, I believe the paper will benefit from  more experiments, particularly on the instance segmentation and  completion parts.
+\end{reviewercomment}
 
+\response{Thanks for your positive comments.}
+
+%============
 % Reviewer 1
+%============
 \reviewer
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{reviewercomment}
@@ -97,8 +122,10 @@
     ...
 }
     
-
+%============
 % Reviewer 2
+%============
+
 \reviewer
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{reviewercomment}

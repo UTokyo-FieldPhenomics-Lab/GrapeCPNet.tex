@@ -186,11 +186,16 @@ innerleftmargin=0.6em,innerrightmargin=0.6em]{quote}
 \newcommand{\email}[1]{\gdef\@email{#1}}
 \renewcommand\thefigure{R\arabic{figure}}
 \renewcommand\thetable{R\arabic{table}}
+
+\newcommand*{\thetitle}{\@title}
+\newcommand*{\thejournal}{\@journal}
+\newcommand*{\thedate}{\@date}
+
 % Make title and legend
 \renewcommand\maketitle{
 {\LARGE\bf\centering \@lettertitle}\\[1em]
 {\@journal, }\\[0.7em]
-{Manuscript ID: \@doi}\\[1.4em]
+{Manuscript ID: \@doi}\\[3em]
 {\Large\bf \@title}\\[0.6em]
 {\@author}\\[0.6em]
 {\@corresponding}\\[0.6em]
