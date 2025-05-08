@@ -141,8 +141,14 @@ innerleftmargin=0.6em,innerrightmargin=0.6em]{quote}
 \WithSuffix\long\def\BL*#1\par{#1\par} %\BL
 
 \RequirePackage{tcolorbox}
+\RequirePackage{xcolor} % 确保颜色支持
 
-\long\def\response#1\par{\makebox[0pt][r]{\hspace{10pt}}{\large\textbf{Response: }\\[2pt]}{#1}\\[4pt]} %\response
+\long\def\response#1\par{%
+  \makebox[0pt][r]{\hspace{10pt}}{\large\textbf{Response: }\\[2pt]}%
+  {#1}\\[4pt]%
+  \noindent\leavevmode%
+  \begingroup\color{gray!30}\hrule height 0.5pt\endgroup\vspace{4pt}% 添加淡灰色分割线
+}
 \WithSuffix\long\def\response*#1\par{#1\par} %\response
 
 

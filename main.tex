@@ -530,11 +530,19 @@ To validate the efficiency of our method, the experiments were conducted on each
 \subsection{Berry Instance Segmentation Results}
 \label{sec:insegresults}
 
+\added[id=R1]{
+    Our controlled indoor environment (Fig.~\ref{fig:raw9}) with high-overlap scanning enabled high-quality grape point cloud reconstruction, featuring clear boundaries and minimal noise.
+    Some reconstructed results are shown in Figs.~\ref{fig:raw10}, \ref{fig:raw2}, \ref{fig:raw11}, and \ref{fig:raw13}.
+    These high-quality input data reduced the challenges in annotating instance berry segmentation training data.
+    They also simplified the segmentation model training by minimizing concerns about noise and unclear boundaries.
+}
+
+\added[id=R1]{The segmentation task divides the grape bunch into two parts: berries and stems.} 
 The mAP@[.5:.95] values of berry and stem class are 0.995 and 0.941, respectively, which showed a high accuracy of the berry segmentation from the bunch.
 Since mAP@[.5:.95] is a strict evaluation metric, it represents the mean values of Average Precision (AP) scores calculated from AP50 to AP95 at 5\% IoU intervals.
 Compared to other studies, \citet{ni_threedimensional_2021} reported that their proposed segmentation network achieved a mAP@[.5:.95] of 0.877 on their testing dataset, while \citet{du_instance_2023} achieved a mAP[.5:.95] of 0.657 and an AP50 of 0.952.
 In our study, the AP50 value exceeded 0.999, with both recall and precision values at this level also over 0.999.
-When compared to traidtional berry semgnetation algorithms, \citet{rose_automated_2016} reported a mean recall of 0.776 and precision of 0.978;
+When compared to traditional berry segmentation algorithms, \citet{rose_automated_2016} reported a mean recall of 0.776 and precision of 0.978;
 The results of four fresh grapes for bunch point cloud segmentation are visualized in Fig.~\ref{fig:raw13}.
 According that figure, we can also see an almost perfect instance berry segmentation results.
 
@@ -673,6 +681,11 @@ In another approach, \citet{luo_3d_2023} Mask R-CNN for 2D image segmentation an
 The normal directions derived from the point clouds were then packed as an additional feature in the PointNet++ network for point cloud segmentation.
 In this study, we applied the state-of-the-art point cloud segmentation network, SoftGroup \citep{vu_softgroup_2022} directly to the problem.
 The primary time-consuming work of our approach was the annotation of 3D data for instance segmentation.
+\added[id=R1]{
+    We acknowledge that manual annotation of 3D data on 2D displays may introduce some human errors, meaning even the ground truth segmentation annotations are not perfectly accurate.
+    However, due to the high-quality 3D reconstruction with clear berry boundaries and minimal noise effects,
+    we could train a highly accurate SoftGroup segmentation network, achieving an mAP@[.5:.95] of 0.995 and AP50 of 0.999.
+}
 Compared to similar studies on grape berries, our proposed method demonstrated superior performance, achieving the best results among the reviewed methods (Subsection~\ref{sec:insegresults}).
 
 For berry completion using deep learning, the most challenging and time-consuming task is preparing the paired training datasets of complete and incomplete point clouds.
@@ -698,7 +711,16 @@ We subsequently consider utilizing the prior knowledge of berry geometry to achi
     Future work should involve collaboration with U.S. researchers to collect wine grape datasets and assess whether models trained on table grapes can generalize well to smaller wine grape berries without additional training.
 }
 
-\replaced[id=R2]{Additionally, this study only}{Another limitation of this study is that it} focused on a single berry bunch in a controlled environment.
+\added[id=R1]{
+    The design philosophy focuses on ensuring input quality and assigning specialized networks to their respective tasks, which provides the most efficient approach. 
+    Rather than developing complex algorithms to process low-quality inputs with unclear berry boundaries and noisy 3D models, improving input quality simplifies the problem and enhances the results. 
+    Similarly, assigning each specialized network to its specific task is essential. 
+    In this study, the segmentation network reliably performs instance separation, while the completion network specializes in partial point cloud completion. 
+    Although the automatic training data generation strategy can be adjusted to produce poor segmentation outputs—for example, by adding noise or partially cutting neighboring berries—it remains difficult to cover all potential error patterns to improve robustness. 
+    Additionally, training with too many low-quality samples may negatively affect network performance. 
+    However, this design philosophy also faces challenges in practical applications.
+}
+\replaced[id=R1]{For example, this study}{Another limitation of this study is that it} focused on a single berry bunch in a controlled environment.
 The noise in the data is also related to the effectiveness of the method proposed in this paper.
 For practical applications in vineyards, collecting the same point cloud quality as that achieved in controlled indoor environments can be challenging, and multi-view data collection may not be as efficient.
 How to effectively implement the method in practical application scenarios is another issue to be considered in future research.
@@ -706,6 +728,7 @@ To increasing data collection efficiency, devices such as RGB-D cameras \citep{b
 Moreover, as in previous studies \citep{rose_automated_2016, luo_3d_2023}, investigating methods to segment individual grape bunches directly from vineyard scans using deep learning techniques should be an area of future exploration.
 Additionally, \citet[Fig.~9]{scholer_automated_2015} successfully demonstrated the construction of virtual 3D models of grape bunches, including the hidden branching architecture. 
 By collecting time-series growth data, the branching structure could potentially be captured during early stages of thinning, as suggested by \citep{du_instance_2023}.
+\added[id=R1]{Lastly, with the development of lidar scanning techniques, some companies also provide low-cost products to improve 3D scanning results in the field, such as XGrids (XGRIDS LIMITED, \url{https://www.xgrids.com}).}
 Such data could enable studies on growth prediction for optimizing harvesting times and assessments of branching structure deviations within crowded berry bunches.
 Finally, applying the latest procedural computer graphics (CG) modeling techniques or functional-structural plant models represents another promising approach to advancing practical applications in this field.
 

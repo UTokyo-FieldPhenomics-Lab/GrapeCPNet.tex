@@ -108,16 +108,10 @@ Email: guowei@g.ecc.u-tokyo.ac.jp
 \end{reviewercomment}
 
 \response{
-    We sincerely appreciate the reviewer's positive assessment of our study and manuscript. 
-    Regarding the suggestion for additional experiments, we agree that further validation would strengthen the work. 
-
-    In response, we have:
-
-    ...
-}
-
-\todoblock{
-    Summary of added experiment.
+    We sincerely appreciate the reviewer's valuable feedback and constructive suggestions for improving our paper. 
+    Regarding the request for additional experiments on instance segmentation and completion,
+    We have enhanced the manuscript to better explain these design choices in the Methods, Results and  Discussion sections.
+    Please find our detailed responses to each specific comment below.
 }
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -126,31 +120,75 @@ Email: guowei@g.ecc.u-tokyo.ac.jp
 \end{reviewercomment}
 
 \response{
-    We sincerely appreciate the reviewer's valuable suggestions regarding the instance segmentation evaluation. 
-    In response, we have conducted additional comparative experiments by applying our completion network to both manually annotated ground truth labels and SoftGroup segmentation results, with quantitative comparisons shown in the new results figure and table below.
+    We sincerely appreciate the reviewer's insightful comments regarding the evaluation of instance segmentation and its impact on the completion network. 
+    We agree that analyzing the robustness of the completion network to segmentation errors is an interesting direction, and we already have conducted a similar preliminary experiments during the early stage of our studies.
 
+    In our preliminary tests on a small subset of data, we visually compared the outputs of completion network on using ground truth segmentation versus SoftGroup segmentation outputs. 
+    The differences were negligible to the human eye thus not mentioned in the manuscript.
+    This is because our high-quality grape point clouds (captured in a controlled indoor environment with high-overlap scanning) exhibit clear boundaries and minimal noise. 
+    Also, since our segmentation network (trained on manually annotated data using SoftGroup) achieves near-perfect performance (mAP@[.5:.95] of 0.995, representing AP50 of 0.999), making its outputs virtually almost indistinguishable from ground truth for our application.
+    Moreover, we note that manual annotation of 3D data on 2D displays inevitably contains some human error, meaning even ``ground truth'' segmentations are not perfectly accurate.
     
-    A t-test analysis revealed no statistically significant differences between the two approaches (p > xxx), demonstrating that our high-accuracy segmentation network (achieving mAP@[.5:.95] of 0.995 represents an AP50 of 0.999 for our results) provides sufficiently reliable inputs for the completion network. 
+    Given these observations, we believe our current design - where each specialized network focuses on its respective task - represents the most efficient approach. 
+    The segmentation network reliably handles instance separation, while the completion network specializes in partial point cloud completion.
+    While artificially generating poor segmentation outputs to test completion robustness could be interesting, 
+    it would require additional design to generating extra training data to cover various error patterns that might negatively impact network training.
 
-    We maintain our design of having specialized networks focus on their respective tasks: the segmentation network achieves reliable segmentation accuracy, while the completion network specializes in partial point cloud completion. 
-    Rather than increasing the completion network's robustness to handle poor segmentation results.
-    It would require generating artificial training data with various error patterns that might negatively impact training.
-    We believe it is more principled to improve the segmentation performance directly. 
-    This modular approach ensures clear responsibility separation between network components.
-}
-
-\todoblock{
-    Execute the following experiment on manual annotation bunches:
-
-    1. Apply completion networks directly on ground truth (separated 3D reconstruction)
-
-    2. Run SoftGroup segmentation on ground truth, and then apply completion networks on these results
-
-    3. Compare two results to draw comparison tables and runing t-test to show no significant differences.
+    Instead, we believe it's more principled to:
+    1) Improve data collection quality, as poor-quality inputs lead to poor-quality outputs; and
+    2) Enhance segmentation accuracy to ensure high-quality inputs for the completion network.
 }
 
 \manuscript{
-    ...
+    and the result of obtaining the phenotypic traits.
+
+    \textbf{3.1 Berry Instance Segmentation Results}
+
+    \added[id=R1]{
+    Our controlled indoor environment (Fig.~\ref{fig:raw9}) with high-overlap scanning enabled high-quality grape point cloud reconstruction, featuring clear boundaries and minimal noise.
+    Some reconstructed results are shown in Figs.~\ref{fig:raw10}, \ref{fig:raw2}, \ref{fig:raw11}, and \ref{fig:raw13}.
+    These high-quality input data reduced the challenges in annotating instance berry segmentation training data.
+    They also simplified the segmentation model training by minimizing concerns about noise and unclear boundaries.
+}
+
+    \added[id=R1]{The segmentation task divides the grape bunch into two parts: berries and stems.} 
+    The mAP@[.5:.95] values of berry and stem class are 0.995 and 0.941, respectively, which showed a high accuracy of the berry segmentation from the bunch.
+}
+
+\manuscript{
+    The primary time-consuming work of our approach was the annotation of 3D data for instance segmentation.
+    \added[id=R1]{
+        We acknowledge that manual annotation of 3D data on 2D displays may introduce some human errors, meaning even the ground truth segmentation annotations are not perfectly accurate.
+        However, due to the high-quality 3D reconstruction with clear berry boundaries and minimal noise effects,
+        we could train a highly accurate SoftGroup segmentation network, achieving an mAP@[.5:.95] of 0.995 and AP50 of 0.999.
+    }
+    Compared to similar studies on grape berries, our proposed method demonstrated superior performance, achieving the best results among the reviewed methods (Subsection~\ref{sec:insegresults}).
+    \added[id=R1]{Instead of developing complex algorithms to handle low-quality inputs, improving input quality simplifies the problem and produces better outputs.}
+
+    For berry completion using deep learning, the most challenging and time-consuming task is
+}
+
+\manuscript{
+    \added[id=R2]{
+        and assess whether models trained on table grapes can generalize well to smaller wine grape berries without additional training.
+    }
+
+    \added[id=R1]{
+        The design philosophy focuses on ensuring input quality and assigning specialized networks to their respective tasks, which provides the most efficient approach. 
+        Rather than developing complex algorithms to process low-quality inputs with unclear berry boundaries and noisy 3D models, improving input quality simplifies the problem and enhances the results. 
+        Similarly, assigning each specialized network to its specific task is essential. 
+        In this study, the segmentation network reliably performs instance separation, while the completion network specializes in partial point cloud completion. 
+        Although the automatic training data generation strategy can be adjusted to produce poor segmentation outputs—for example, by adding noise or partially cutting neighboring berries—it remains difficult to cover all potential error patterns to improve robustness. 
+        Additionally, training with too many low-quality samples may negatively affect network performance. 
+        However, this design philosophy also faces challenges in practical applications.
+    }
+    \replaced[id=R1]{For example, this study}{Another limitation of this study is that it} focused on a single berry bunch in a controlled environment.
+}
+
+\manuscript{
+    the branching structure could potentially be captured during early stages of thinning, as suggested by \citep{du_instance_2023}.
+    \added[id=R1]{Lastly, with the development of lidar scanning techniques, some companies also provide low-cost products to improve 3D scanning results in the field, such as XGrids (XGRIDS LIMITED, \url{https://www.xgrids.com}).}
+    Such data could enable studies on growth prediction for optimizing harvesting times and assessments of branching structure deviations within crowded berry bunches.
 }
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
