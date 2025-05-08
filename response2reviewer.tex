@@ -1,3 +1,13 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%% IMPORTANT NOTICE %%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% The `main.tex` can be compiled directly on Overleaf, 
+% but the `response2reviewers.tex` needs to be locally compiled, 
+% which requires the `out/main.aux` and `out/main.pdf` file to get correct compiling.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%% IMPORTANT NOTICE %%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
 \documentclass{ar2rc}
 \usepackage{multicol}
 \usepackage{tcolorbox}
@@ -13,6 +23,9 @@
 % 关联主文档用来索引引用
 \usepackage{xr}
 \externaldocument{main} 
+
+% 将main.pdf添加到末尾
+\usepackage{pdfpages}
 
 \usepackage[draft,commandnameprefix=ifneeded]{changes}
 \definechangesauthor[color=red]{R1}
@@ -65,7 +78,7 @@ The University of Tokyo, Tokyo, Japan\\
 Email: guowei@g.ecc.u-tokyo.ac.jp
 
 \vfill
-\textbf{Note:} To enhance the legibility of this response letter, all the editor's and reviewers' comments are typeset in boxes. Rephrased or added sentences are typeset in color. The respective parts in the manuscript are highlighted to indicate changes.
+\textbf{Note:} To enhance the legibility of this response letter, all the editor's and reviewers' comments are typeset in boxes. Rephrased or added sentences are typeset in color with suffix \added[id=R1]{} and \added[id=R2]{}. The respective parts in the manuscript are highlighted to indicate changes.
 
 %====================
 % Response to Editor
@@ -456,7 +469,9 @@ Email: guowei@g.ecc.u-tokyo.ac.jp
         Future work should involve collaboration with U.S. researchers to collect wine grape datasets and assess whether models trained on table grapes can generalize well to smaller wine grape berries without additional training.
     }
 
-    \replaced[id=R2]{Additionally, this study only}{Another limitation of this study is that it} focused on a single berry bunch in a controlled environment.
+    \added[id=R1]{
+        The design philosophy focuses on ensuring input quality and assigning specialized networks to their respective tasks, which provides the most efficient approach. 
+    }
 }
 
 
@@ -465,6 +480,8 @@ Email: guowei@g.ecc.u-tokyo.ac.jp
 \bibliographystyle{elsarticle-harv}
 % \renewcommand{\bibsection}{} % 隐藏reference标题，如果需要则注释掉这一行
 \bibliography{references}
+
+\includepdf[pages=-]{out/main.pdf} % 添加整个 PDF
 
 \end{document}
 

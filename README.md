@@ -1,7 +1,6 @@
 # GrapeCPNet
 Paper: GrapeCPNet: A deep learning integration for grape completion and phenotyping in 3D  
 
-# Test Data and Weights are available here:
-Please fill out the [form here](https://forms.gle/dDQwvTrHGtZebAG59) to receive the download link
+Source code, test data and weights are available at [https://github.com/I3-Laboratory/GrapeCPNet]()
 
-When you download the dataset, please run the example by following the steps: 
+The `main.tex` can be compiled on Overleaf, but the `response2reviewers.tex` needs to be locally compiled, which requires the `out/main.aux` and `out/main.pdf` file to get correct compile.
