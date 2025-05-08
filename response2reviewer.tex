@@ -197,38 +197,42 @@ Email: guowei@g.ecc.u-tokyo.ac.jp
 \end{reviewercomment}
 
 \response{
-    We thank the reviewer for these insightful suggestions regarding ablation studies for our completion network. 
-    For current manuscript, we already have part ablation studies. 
-    The GrapeCPNet is combined the modification of PoinTr and SnowFlakeNet.
-    As shown in the original Table 3, we compared the performance of:
-    (1) Standalone PoinTr; (2) Standalone SnowFlakeNet; (3) Our modified GrapeCPNet (combined architecture).
-    The results demonstrated the superiority of our integrated approach.
+    We thank the reviewer for the insightful suggestions regarding ablation studies for our completion network. 
+    We would like to clarify that GrapeCPNet is not an entirely new network architecture, but rather a combination of features from two existing models (PoinTr and SnowFlakeNet). 
+    This approach differs from traditional network design methodologies. 
+    Therefore, performing the suggested ablation studies may not be practical or aligned with our main research objectives.
 
-    We have also expanded our ablation studies to provide more comprehensive analysis as you suggested:
+    However, when treating each network component as an independent module, our results already include comparative experiments between individual networks and the combined architecture. 
+    As shown in Table 3, we compared the performance of: (1) PoinTr alone; (2) SnowFlakeNet alone; (3) Our combined GrapeCPNet. 
+    The results demonstrate that the combined architecture outperforms either individual network.
 
-    1. \textbf{Impact of Cut Numbers}: We conducted new experiments evaluating how different occlusion levels (number of cuts) affect completion performance:
+    To support future research in this area, we will make our source code and training data publicly available. 
+    This will allow other researchers to examine how preprocessing parameters may affect the network's performance.
 
-    ...
-
-    The results showed that mixed occlusion training significantly improves generalization
-
-    2. \textbf{Point Number Analysis}: We investigated how output point count affects SnowFlakeNet performance:
-
-    ...
-
-    The result showed higher point counts yield better completion quality.
-}
-
-\todoblock{
-    To add the experiement:
-
-    1. split training data to 1 cuts, 2cuts, 3cuts, 4 cuts and 5 cuts, train 5 individual networks and validate on val dataset and compare with 1-5 full training data? (expected -> less cuts in training data, worse performance on server overlapped.)
-    
-    2. Decrease the feature M (current=2048) of networks, 2048, 1024, 512, 256, to see if any affects of completion results.
+    We have also added the above discussion in the results section.
 }
 
 \manuscript{
-    ...
+    this paper further validated the efficacy of the 3D phenotypic traits of grape by the proposed method.
+
+    \added[id=R1]{
+        Since GrapeCPNet combines features from two existing models (PoinTr and SnowFlakeNet) rather than introducing a completely new architecture,
+        ablation studies may not align with our research focus.
+        However, we conducted comparative experiments by treating each network as an independent module.
+        As shown in Table~\ref{tbl:4}, we evaluated three approaches: (1) PoinTr alone, (2) SnowFlakeNet alone, and (3) our combined GrapeCPNet.
+        The results show that GrapeCPNet achieves better performance than either individual network.
+        To facilitate future research, we will release our source code and training data at \url{https://github.com/I3-Laboratory/GrapeCPNet}.
+        This will enable interested researchers to examine how preprocessing parameters influence the network's performance.
+    }
+
+    \textbf{3.3 Phenotypic Traits Calculation Results}
+}
+
+\manuscript{
+    \textbf{Data availability}
+
+    The \added[id=R1]{demo dataset, source codes} and model weight for the \replaced[id=R1]{academic}{test} usage is available \replaced[id=R1]{at}{here:} \url{https://github.com/I3-Laboratory/GrapeCPNet}. 
+    The whole dataset \added[id=R1]{and codes} used in this paper is available upon request.
 }
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -239,27 +243,47 @@ Email: guowei@g.ecc.u-tokyo.ac.jp
 \response{
     We appreciate the reviewer's suggestion regarding additional baselines. 
 
-    The work of \citet{marangoz_fruit_2022} generates cube-like point clouds for peppers, which may not be suitable for our sphere-like grape berries.
-    Additionally, re-implementation their algorithm is time-consuming and unlikely to benefit our current grape project.
-    Our ellipsoid surface fitting is a similar non-learning-based approach, serving for berry traits analysis in this study. 
-    Therefore, it may not be appropriate as a baseline comparison.
-
     The comparison with \citet{blok_highthroughput_2025} was not included initially because these were independent parallel research projects during our manuscript preparation phase. 
-    Following editorial recommendations during the submission process, we subsequently added discussions of comparable works in the revised manuscript, including it into the discussion part after its acceptance.
+    Following editorial recommendations during the submission process, we subsequently added discussions of comparable works in the revised manuscript, including it into the discussion part after \citet{blok_highthroughput_2025} been accepted.
 
-    In this revision, we have now included CoRe++ from \citet{blok_highthroughput_2025} performance on our grape dataset in Table 3. 
-    However, we observe that the network architectures target substantially different objectives.
-    Our grape dataset involves partial completion from the same sensor type, while the potato network focuses on fusing different sensors 
-    (with incomplete point clouds from RGB-D and complete ones from SfM, exhibiting significant shape and texture differences). 
-    Our approach emphasizes better completion performance while the \citet{blok_highthroughput_2025} more on processing speed and real-time processing, and consequently, CoRe++ does not demonstrate significant advantages in our grape dataset scenario.
-}
+    Additionally, the network architectures target substantially different objectives. 
+    This grape completion involves partial completion using the same sensor type, while the potato network focuses on fusing different sensors with an emphasis on processing speed and real-time performance. 
+    Specifically, \citet{blok_highthroughput_2025} works with incomplete point clouds from RGB-D sensors and complete point clouds from SfM, which exhibit significant differences in shape and texture. 
+    Our approach aims for better completion performance on ellipsoid berry shapes with smooth surfaces, whereas \citet{blok_highthroughput_2025} focuses on irregular and elongated potato tuber shapes. 
+    Although both networks perform completion tasks, their purposes and input data differ. 
+    For the future work, it may be interesting to do a comparation of two networks on inverted crops.
+    
+    It is also the similar reason why we not comparing with \citet{marangoz_fruit_2022}.
+    The work of \citet{marangoz_fruit_2022} generates cube-like point clouds for peppers, which would may not be suitable for ellipsoid grape berries with smooth surfaces.
+    Additionally, re-implementation their algorithm is time-consuming and unlikely to benefit our current grape project.
+    Our ellipsoid surface fitting is a similar non-learning-based approach, serving for berry traits analysis in this study (section~\ref{sec:ellipsoid}). 
+    Therefore, non-learning-based approach may not be appropriate as a baseline comparison
 
-\todoblock{
-    Add CoRe++ results to Table 3 (collaboration with pieter)
+    We have also added the above discussion in the introduction and discussion section.
 }
 
 \manuscript{
-    ...
+    provided an appropriate symmetrical plane can be identified.
+    \citet{marangoz_fruit_2022} proposed an super-ellipsoids matching approach to \replaced[id=R1]{generate cube-like point clouds for peppers}{ map fruits on plants} and estimate their shape.
+    However, these methods are limited to specific fruit characteristics and require manual design of algorithms according to the features of the fruit
+}
+
+\manuscript{
+    training datasets of complete and incomplete point clouds.
+    In our \replaced[id=R1]{recent}{previous} work on potato tuber completion networks \citep{blok_highthroughput_2025}, a distinguishable pin was 
+}
+
+\manuscript{
+    these automatically generated paired training datasets were successfully used to train several completion models (Table~\ref{tbl:4}).
+
+    \added[id=R1]{
+        Although our recent work proposed a completion network for partial potato tubers \citep{blok_highthroughput_2025}, the purposes and input data types differ. 
+        This grape completion study uses the same sensor type, whereas the potato network focuses on fusing different sensors with an emphasis on processing speed and real-time performance on fast-moving conveyors. 
+        Specifically, the tuber completion study processes incomplete point clouds from RGB-D sensors and complete point clouds from SfM, which show significant differences in shape and texture. 
+        Additionally, the grape completion targets smooth ellipsoid berry surfaces, while potato tubers have more irregular and elongated shapes. 
+        For future work, it may be interesting to compare the two networks on inverted crops.
+    }
+    We \replaced[id=R1]{also}{have} found that some researchers
 }
     
 %============

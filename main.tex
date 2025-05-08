@@ -110,7 +110,7 @@ Therefore, point cloud instance segmentation can only capture partial informatio
 To address this issue and consequently an underestimation of the berry traits, point cloud shape completion is one of the most commonly used solutions.
 Point cloud completion is the task of generating a complete 3D shape given partial point cloud input \citep{tesema_point_2024}. 
 For instance, \citet{ge_symmetrybased_2020} assume that strawberries are symmetrical, suggesting that their shape can be completed by mirroring the existing shape, provided an appropriate symmetrical plane can be identified.
-\citet{marangoz_fruit_2022} proposed an super-ellipsoids matching approach to map fruits on plants and estimate their shape.
+\citet{marangoz_fruit_2022} proposed an super-ellipsoids matching approach to \replaced[id=R1]{generate cube-like point clouds for peppers}{ map fruits on plants} and estimate their shape.
 However, these methods are limited to specific fruit characteristics and require manual design of algorithms according to the features of the fruit, lacking the potential for generalized application.
 Utilizing deep learning methods, researchers have designed point cloud completion networks \citep{wang_unsupervised_2021}. 
 \citet{park_deepsdf_2019} introduced DeepSDF to achieve the completion of object point cloud models. It uses a learned continuous signed distance function to represent a class of shapes in latent space and is tolerant to noisy 3D input data. 
@@ -432,6 +432,7 @@ In this paper, when $i=2$ (an empirical value), the final predicted dense point 
 Through the above steps, the complete 3D point cloud model of the berry can be obtained after contour completion and surface completion of GrapeCPNet.
 
 \subsection{Phenotypic Traits Calculation and Validation}
+\label{sec:ellipsoid}
 
 To describe the 3D morphology of berries, this paper used ellipsoidal surface fitting with three axes, for the completed berry point cloud (Fig.~\ref{fig:raw16}).
 
@@ -608,6 +609,16 @@ First, there are differences between the dataset of the training phase and the a
 In addition, when evaluating the actual application efficiency of the model, the true value of the reconstructed complete point cloud of a single berry and the prediction value of the complemented point cloud suffer from the drop in the accuracy after aligning them. 
 Through the above results, the experiments of berry point cloud completion based on self-supervised training reflected the efficacy of GrapeCPNet, meanwhile, this paper further validated the efficacy of the 3D phenotypic traits of grape by the proposed method.
 
+\added[id=R1]{
+    Since GrapeCPNet combines features from two existing models (PoinTr and SnowFlakeNet) rather than introducing a completely new architecture,
+    ablation studies may not align with our research focus.
+    However, we conducted comparative experiments by treating each network as an independent module.
+    As shown in Table~\ref{tbl:4}, we evaluated three approaches: (1) PoinTr alone, (2) SnowFlakeNet alone, and (3) our combined GrapeCPNet.
+    The results show that GrapeCPNet achieves better performance than either individual network.
+    To facilitate future research, we will release our source code and training data at \url{https://github.com/I3-Laboratory/GrapeCPNet}.
+    This will enable interested researchers to examine how preprocessing parameters influence the network's performance.
+}
+
 \subsection{Phenotypic Traits Calculation Results}
 
 The radius parameters were calculated by fitting the berry to the surface of an ellipsoid.
@@ -689,14 +700,22 @@ The primary time-consuming work of our approach was the annotation of 3D data fo
 Compared to similar studies on grape berries, our proposed method demonstrated superior performance, achieving the best results among the reviewed methods (Subsection~\ref{sec:insegresults}).
 
 For berry completion using deep learning, the most challenging and time-consuming task is preparing the paired training datasets of complete and incomplete point clouds.
-In our previous work on potato tuber completion networks \citep{blok_highthroughput_2025}, a distinguishable pin was used as a reference point to align the complete tuber scans obtained via photogrammetry with the incomplete tuber scans captured using an RGB-D camera.
+In our \replaced[id=R1]{recent}{previous} work on potato tuber completion networks \citep{blok_highthroughput_2025}, a distinguishable pin was used as a reference point to align the complete tuber scans obtained via photogrammetry with the incomplete tuber scans captured using an RGB-D camera.
 A pin-guided point cloud matching algorithm was then applied to calculate the transformation matrix for pairing the datasets.
 Potato tubers, being single objects with clear textures and shape variation, presented fewer challenges when aligning data collected by two different types of sensors.
 However, grape berries pose a significantly more difficult problem due to their highly rounded shapes, weak texture features, and strong reflectance, which complicates the creation of paired data.
 As a result, the previous pin-guided point cloud pairing method used for potato tuber datasets is not effective for grape berries.
 Thus, we simulated random sphere cutting on the complete berry point clouds to generate thousands of paired incomplete point clouds, as described in Subsection~\ref{sec:berrycut}.
 As demonstrated in Subsection~\ref{sec:32}, these automatically generated paired training datasets were successfully used to train several completion models (Table~\ref{tbl:4}).
-We have found that some researchers \citep{pan_panoptic_2023,magistri_efficient_2024} have improved the completion effect by encoding a prior knowledge of the geometry of the object into the weights of the neural network. 
+
+\added[id=R1]{
+    Although our recent work proposed a completion network for partial potato tubers \citep{blok_highthroughput_2025}, the purposes and input data types differ. 
+    This grape completion study uses the same sensor type, whereas the potato network focuses on fusing different sensors with an emphasis on processing speed and real-time performance on fast-moving conveyors. 
+    Specifically, the tuber completion study processes incomplete point clouds from RGB-D sensors and complete point clouds from SfM, which show significant differences in shape and texture. 
+    Additionally, the grape completion targets smooth ellipsoid berry surfaces, while potato tubers have more irregular and elongated shapes. 
+    For future work, it may be interesting to compare the two networks on inverted crops.
+}
+We \replaced[id=R1]{also}{have} found that some researchers \citep{pan_panoptic_2023,magistri_efficient_2024} have improved the completion effect by encoding a prior knowledge of the geometry of the object into the weights of the neural network. 
 Considering the agricultural plant completion task, our proposed GrapeCPNet, which combines centroid-based sparse completion with diffusion-based dense completion, outperformed other networks in terms of performance.
 We found that GrapeCPNet performed a little bit worse in the case of strange berry shapes, such as drop-shaped \added[id=R2]{berries, particularly when berries were sereverly occluded}.
 We subsequently consider utilizing the prior knowledge of berry geometry to achieve more detailed morphological feature extraction and representation to improve the quality of completion. 
@@ -761,7 +780,8 @@ During the preparation of this work the authors used ChatGPT in order to check g
 The authors declare that they have no known competing financial interests or personal relationships that could have appeared to influence the work reported in this paper.
 
 \section*{Data availability}
-The dataset and model weight for the test usage is available here: https://github.com/I3-Laboratory/GrapeCPNet. The whole dataset used in this paper is available upon request.
+The \added[id=R1]{demo dataset, source codes} and model weight for the \replaced[id=R1]{academic}{test} usage is available \replaced[id=R1]{at}{here:} \url{https://github.com/I3-Laboratory/GrapeCPNet}. 
+The whole dataset \added[id=R1]{and codes} used in this paper is available upon request.
 
 \section*{Funding}
 This study was partially supported by the National Natural Science Foundation of China (NSFC) Program 62276009 and the Japan Science and Technology Agency (JST) AIP Acceleration Research JPMJCR21U3, the Hokkaido Sarabetsu Village ``Endowed Chair for Field Phenomics'' project.
