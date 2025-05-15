@@ -65,9 +65,9 @@
 
 Dear Editor:
 
-Thank you for giving us the opportunity to submit a revised draft of the manuscript ``\thetitle'' for publication in the Journal of \thejournal. We appreciate the time and effort that editors and the reviewers dedicated to providing feedback on our manuscript and are grateful for the insightful comments and valuable improvements to our paper. We have incorporated most of the suggestions made by the reviewers. Those changes are highlighted within the manuscript. Please see below, for a point-by-point response to the reviewers' comments and concerns. All page numbers refer to the revised manuscript file with tracked changes.
+Thank you for giving us the opportunity to submit a revised draft of the manuscript ``\thetitle'' for publication in the Journal of \thejournal. We appreciate the time and effort that editors and the reviewers dedicated to providing feedback on our manuscript and are grateful for the insightful comments and valuable improvements to our paper. We have incorporated the suggestions made by the reviewers. Those changes are highlighted within the manuscript. Please see below for a point-by-point response to the reviewers' comments and concerns. All page numbers refer to the revised manuscript file with tracked changes.
 
-Thank your for your consideration. I am looking forward to hearing from you soon.
+Thank you for your consideration. I am looking forward to hearing from you soon.
 
 Sincerely,
 
@@ -101,13 +101,13 @@ Email: guowei@g.ecc.u-tokyo.ac.jp
     In this revision, we have:
 
     1. Carefully addressed all reviewer comments point-by-point;\\
-    2. ...
+    2. Especially, ...
     % 2. Provided detailed responses explaining each modification;\\
     % 3. Made all necessary revisions to improve manuscript clarity and technical accuracy;\\
     % 4. Included tracked changes in the revised manuscript for transparent review.
 
-    We believe these revisions have significantly strengthened the paper, and we appreciate the editor's and reviewers' time and constructive suggestions. 
-    Please find our point-by-point responses to each reviewer comment in the following sections.
+    These revisions have significantly strengthened the paper, and we appreciate the editors' and reviewers' time and constructive suggestions. 
+    Please find our point-by-point responses to each reviewer's comment in the following sections.
 }
 
 %============
@@ -136,16 +136,16 @@ Email: guowei@g.ecc.u-tokyo.ac.jp
     We sincerely appreciate the reviewer's insightful comments regarding the evaluation of instance segmentation and its impact on the completion network. 
     We agree that analyzing the robustness of the completion network to segmentation errors is an interesting direction, and we already have conducted a similar preliminary experiments during the early stage of our studies.
 
-    In our preliminary tests on a small subset of data, we visually compared the outputs of completion network on using ground truth segmentation versus SoftGroup segmentation outputs. 
-    The differences were negligible to the human eye thus not mentioned in the manuscript.
+    In our preliminary tests on a small subset of data, we visually compared the outputs of the completion network on using ground truth segmentation versus SoftGroup segmentation outputs. 
+    The differences were negligible to the human eye and thus not mentioned in the manuscript.
     This is because our high-quality grape point clouds (captured in a controlled indoor environment with high-overlap scanning) exhibit clear boundaries and minimal noise. 
-    Also, since our segmentation network (trained on manually annotated data using SoftGroup) achieves near-perfect performance (mAP@[.5:.95] of 0.995, representing AP50 of 0.999), making its outputs virtually almost indistinguishable from ground truth for our application.
+    Also, since our segmentation network (trained on manually annotated data using SoftGroup) achieves near-perfect performance (mAP@[.5:.95] of 0.995, representing AP50 of 0.999), making its outputs virtually indistinguishable from ground truth for our application.
     Moreover, we note that manual annotation of 3D data on 2D displays inevitably contains some human error, meaning even ``ground truth'' segmentations are not perfectly accurate.
     
-    Given these observations, we believe our current design - where each specialized network focuses on its respective task - represents the most efficient approach. 
+    Given these observations, our current design - where each specialized network focuses on its respective task - represents the most efficient approach. 
     The segmentation network reliably handles instance separation, while the completion network specializes in partial point cloud completion.
     While artificially generating poor segmentation outputs to test completion robustness could be interesting, 
-    it would require additional design to generating extra training data to cover various error patterns that might negatively impact network training.
+    It would require additional design to generate extra training data to cover various error patterns that might negatively impact network training.
 
     Instead, we believe it's more principled to:
     1) Improve data collection quality, as poor-quality inputs lead to poor-quality outputs; and
@@ -219,22 +219,21 @@ Email: guowei@g.ecc.u-tokyo.ac.jp
     As shown in Table 3, we compared the performance of: (1) PoinTr alone; (2) SnowFlakeNet alone; (3) Our combined GrapeCPNet. 
     The results demonstrate that the combined architecture outperforms either individual network.
 
-    To support future research in this area, we will make our source code and training data publicly available. 
-    This will allow other researchers to examine how preprocessing parameters may affect the network's performance.
+    To support future research in this area, we also made our source code and training data of completion net publicly available. 
+    This will allow other researchers to examine how preprocessing parameters affect the completion network's performance.
 
-    We have also added the above discussion in the results section.
+    We have also added the above discussion to the results section.
 }
 
 \manuscript{
     this paper further validated the efficacy of the 3D phenotypic traits of grape by the proposed method.
 
     \added[id=R1]{
-        Since GrapeCPNet combines features from two existing models (PoinTr and SnowFlakeNet) rather than introducing a completely new architecture,
-        ablation studies may not align with our research focus.
+        Since GrapeCPNet combines features from two existing models (PoinTr and SnowFlakeNet) rather than introducing a completely new architecture, ablation studies may not align with our research focus.
         However, we conducted comparative experiments by treating each network as an independent module.
         As shown in Table~\ref{tbl:4}, we evaluated three approaches: (1) PoinTr alone, (2) SnowFlakeNet alone, and (3) our combined GrapeCPNet.
         The results show that GrapeCPNet achieves better performance than either individual network.
-        To facilitate future research, we will release our source code and training data at \url{https://github.com/I3-Laboratory/GrapeCPNet}.
+        The source code and training data are publicly available at \url{https://github.com/I3-Laboratory/GrapeCPNet}.
         This will enable interested researchers to examine how preprocessing parameters influence the network's performance.
     }
 
@@ -244,8 +243,7 @@ Email: guowei@g.ecc.u-tokyo.ac.jp
 \manuscript{
     \textbf{Data availability}
 
-    The \added[id=R1]{demo dataset, source codes} and model weight for the \replaced[id=R1]{academic}{test} usage is available \replaced[id=R1]{at}{here:} \url{https://github.com/I3-Laboratory/GrapeCPNet}. 
-    The whole dataset \added[id=R1]{and codes} used in this paper is available upon request.
+    The \added[id=R1]{demo dataset, source codes} and model weight \added[id=R1]{of GrapeCPNet (completion network)} for the \replaced[id=R1]{academic}{test} usage is available \replaced[id=R1]{at}{here:} \url{https://github.com/I3-Laboratory/GrapeCPNet}. 
 }
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
